@@ -7,22 +7,38 @@
 //
 
 import UIKit
+import Foundation
 
 class CategoriesViewController: UIViewController {
 
+    
+    @IBOutlet private weak var ibProgressView: UIView!
     @IBOutlet private weak var ibTableView: UITableView!
+    
+    private var gameTimer: Timer!
+    private var semiCircleLayer = CAShapeLayer()
+    private let radius = 105
+    private let startAngel = CGFloat( -Double.pi / 2)
+    private var endAngel = CGFloat( -Double.pi / 2)
     
     private var categoriesArray: [Category] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = "Categories:"
         setupTableView()
         getCategoriesData()
-        
+        setupProgressView()
     }
 
     // MARK: - Private methods
+    private func setupProgressView() {
+        ibProgressView.isHidden = false
+        gameTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
+        ibProgressView.layer.addSublayer(semiCircleLayer)
+    }
+    
     private func setupTableView() {
         ibTableView.delegate = self
         ibTableView.dataSource = self
@@ -32,8 +48,23 @@ class CategoriesViewController: UIViewController {
         ibTableView.register(CategoryCell.nib, forCellReuseIdentifier: CategoryCell.reuseIdentifier)
     }
     
+//    @objc open var counter123: CGFloat = 0.0
+//
+//    @objc func updateCounter() {
+//        counter123 = counter123 + 0.1
+//        print(counter123)
+//    }
+    
+//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//        print(counter123)
+//    }
+    
     private func getCategoriesData() {
+//        self.addObserver(self, forKeyPath: #keyPath(counter123), options: [.new, .old, .initial, .prior], context: nil)
+//        let timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
+        
         DataManager.instance.getCategory { [weak self] categories in
+//            timer.invalidate()
             self?.categoriesArray = categories
             self?.ibTableView.reloadData()
         }
@@ -41,6 +72,24 @@ class CategoriesViewController: UIViewController {
     
     private func getCategory(indexPath: IndexPath) -> Category? {
         return categoriesArray[indexPath.row]
+    }
+    
+    @objc func runTimedCode() {
+        endAngel = endAngel + CGFloat(Double.pi / 180)
+        
+        let circlePath = UIBezierPath(arcCenter: ibProgressView.center, radius: CGFloat(radius), startAngle: startAngel, endAngle: endAngel, clockwise: true)
+        
+        semiCircleLayer.path = circlePath.cgPath
+        semiCircleLayer.strokeColor = UIColor.init(red: 184/255, green: 250/255, blue: 236/255, alpha: 1).cgColor
+        semiCircleLayer.fillColor = UIColor.clear.cgColor
+        semiCircleLayer.lineWidth = 4
+        semiCircleLayer.strokeStart = 0
+        semiCircleLayer.strokeEnd  = 1
+        
+        if endAngel >= CGFloat(Double.pi * 1.5) {
+            gameTimer.invalidate()
+           ibProgressView.isHidden = true
+        }
     }
 }
 

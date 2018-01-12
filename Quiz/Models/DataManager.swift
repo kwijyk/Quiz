@@ -10,10 +10,9 @@ import Foundation
 import SwiftyJSON
 
 final class DataManager {
-    
+
     static let instance = DataManager()
     private init() {}
-    
     private var isDataDownloaded: Bool {
         set(newBoolValue) {
             UserDefaults.standard.set(newBoolValue, forKey: Constants.isDataDownloaded)
@@ -26,6 +25,8 @@ final class DataManager {
     private(set) var allQuestions: [Question]?
     
     func getCategory(complition: @escaping ([Category]) -> Void) {
+        
+        
         NetworkService.request(endpoint: QuizEndpoint.categories, completionHandler: { result in
             switch result {
                 

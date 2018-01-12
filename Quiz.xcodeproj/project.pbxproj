@@ -141,12 +141,12 @@
 		88452DF72008A8B1000AE4B2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				88452DF82008A8B1000AE4B2 /* QuestionViewController.swift */,
-				88452DF92008A8B1000AE4B2 /* CategoriesViewController.xib */,
-				88452DFA2008A8B1000AE4B2 /* AnswerViewController.xib */,
-				88452DFB2008A8B1000AE4B2 /* AnswerViewController.swift */,
-				88452DFC2008A8B1000AE4B2 /* QuestionViewController.xib */,
 				88452DFD2008A8B1000AE4B2 /* CategoriesViewController.swift */,
+				88452DF92008A8B1000AE4B2 /* CategoriesViewController.xib */,
+				88452DF82008A8B1000AE4B2 /* QuestionViewController.swift */,
+				88452DFC2008A8B1000AE4B2 /* QuestionViewController.xib */,
+				88452DFB2008A8B1000AE4B2 /* AnswerViewController.swift */,
+				88452DFA2008A8B1000AE4B2 /* AnswerViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
