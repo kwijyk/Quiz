@@ -13,9 +13,37 @@ final class CoreDataManager {
     static let instance = CoreDataManager()
     private init() { }
     
-    // MARK: - Core Data stack
+    // MARK: - Interface
+    var isCategoriesExist: Bool {
+        return false
+    }
     
-    lazy var persistentContainer: NSPersistentContainer = {
+    func fetchCategories(complitionHandler: ([Category]) -> Void) {
+        complitionHandler([])
+    }
+    
+    func saveCategories(_ categories: [Category]) {
+        
+    }
+    
+    var isQuestionsExist : Bool {
+        return false
+    }
+    
+    func fetchQuestions(for categoryID: Int, complitionHandler: ([Question]) -> Void) {
+        complitionHandler([])
+    }
+    
+    func saveQuestions(_ questions: [Question], for categoryID: Int) {
+        
+    }
+    
+    func deleteAllData() {
+        
+    }
+    
+    // MARK: - Private
+    private lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
          creates and returns a container, having loaded the store for the
@@ -44,7 +72,7 @@ final class CoreDataManager {
     
     // MARK: - Core Data Saving support
     
-    func saveContext () {
+    private func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {

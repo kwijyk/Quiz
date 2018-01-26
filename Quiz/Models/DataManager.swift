@@ -26,36 +26,41 @@ final class DataManager {
     
     func getCategory(complition: @escaping ([Category]) -> Void) {
         
-        
-        NetworkService.request(endpoint: QuizEndpoint.categories, completionHandler: { result in
-            switch result {
-                
-            case .success(let value):
-                let jsonObj = JSON(value)
-                guard let jsonArray = jsonObj.array else { return }
-                var categoriesArray = [Category]()
-                
-                for objCategory in jsonArray {
-                    guard let category = Category(json: objCategory) else { continue }
-                    categoriesArray.append(category)
-                }
-                DispatchQueue.main.async {
-                    complition(categoriesArray)
-                }
-            case.failure(let error):
-                print(error)
+        if CoreDataManager.instance.isCategoriesExist {
+            CoreDataManager.instance.fetchCategories { fetchedCatecories in
+                complition(fetchedCatecories)
             }
-        }) 
+        } else {
+            NetworkService.request(endpoint: QuizEndpoint.categories, completionHandler: { result in
+                switch result {
+                    
+                case .success(let value):
+                    let jsonObj = JSON(value)
+                    guard let jsonArray = jsonObj.array else { return }
+                    var categoriesArray = [Category]()
+                    
+                    for objCategory in jsonArray {
+                        guard let category = Category(json: objCategory) else { continue }
+                        categoriesArray.append(category)
+                    }
+                    CoreDataManager.instance.saveCategories(categoriesArray)
+                    DispatchQueue.main.async {
+                        complition(categoriesArray)
+                    }
+                case.failure(let error):
+                    print(error)
+                }
+            })
+        }
     }
     
     func getQuestions(by category: Category) {
-        let stringCategoryID = String(category.id)
-        let keysQuestionID = UserDefaults.standard.object(forKey: stringCategoryID) as? [String] ?? [String]()
-        var questionsArray = [Question]()
         
-        if  keysQuestionID.isEmpty  {
-//          https://qriusity.com/v1/categories/8/questions
+        if CoreDataManager.instance.isQuestionsExist {
             
+        } else {
+            var questionsArray = [Question]()
+            //  https://qriusity.com/v1/categories/8/questions
             NetworkService.request(endpoint: QuizEndpoint.questions(category: category), completionHandler: { [weak self] result in
                 switch result {
                 case .success(let value):
@@ -66,17 +71,19 @@ final class DataManager {
                         questionsArray.append(question)
                     }
                     self?.allQuestions = questionsArray
-                    UserDefaults.standard.set(QuestionStorage.saveArrayDataQuestions(questionsArray), forKey: stringCategoryID)
+                    
+                    CoreDataManager.instance.saveQuestions(questionsArray, for: category.id)
                     self?.postMainQueueNotification(withName: .QestionsLoaded)
                 case.failure(let error):
                     print(error)
                     self?.postMainQueueNotification(withName: .DidFailLoadQestions)
                 }
             })
-        } else {
-           allQuestions = QuestionStorage.loadArrayDataQuestions(by: keysQuestionID)
-            postMainQueueNotification(withName: .QestionsLoaded)
         }
+    }
+    
+    func clearLocalStorage() {
+        CoreDataManager.instance.deleteAllData()
     }
     
     private func postMainQueueNotification(withName name: Notification.Name, userInfo: [AnyHashable: Any]? = nil) {

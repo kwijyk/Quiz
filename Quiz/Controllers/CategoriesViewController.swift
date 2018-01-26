@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class CategoriesViewController: UIViewController {
+class CategoriesViewController: UIViewController, Alertable {
 
     
     @IBOutlet private weak var ibProgressView: UIView!
@@ -27,12 +27,20 @@ class CategoriesViewController: UIViewController {
         super.viewDidLoad()
         
         title = "Categories:"
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "ClearStor", style: .plain, target: self, action: #selector(resetDataPressed))
+        
         setupTableView()
         getCategoriesData()
         setupProgressView()
     }
 
     // MARK: - Private methods
+    @objc private func resetDataPressed() {
+        DataManager.instance.clearLocalStorage()
+        showMessage(title: "Local Storage is cleared")
+    }
+    
     private func setupProgressView() {
         ibProgressView.isHidden = false
         gameTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
