@@ -32,6 +32,8 @@
 		88452E232008A8DC000AE4B2 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E222008A8DC000AE4B2 /* Alertable.swift */; };
 		88452E272008A8E0000AE4B2 /* Notification+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E252008A8E0000AE4B2 /* Notification+Extansion.swift */; };
 		88452E282008A8E0000AE4B2 /* PKHUD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E262008A8E0000AE4B2 /* PKHUD+Extension.swift */; };
+		88C14D13201B565D00E42882 /* Quiz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D11201B565D00E42882 /* Quiz.xcdatamodeld */; };
+		88C14D15201B567100E42882 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D14201B567100E42882 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +65,8 @@
 		88452E222008A8DC000AE4B2 /* Alertable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		88452E252008A8E0000AE4B2 /* Notification+Extansion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification+Extansion.swift"; sourceTree = "<group>"; };
 		88452E262008A8E0000AE4B2 /* PKHUD+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PKHUD+Extension.swift"; sourceTree = "<group>"; };
+		88C14D12201B565D00E42882 /* Quiz.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Quiz.xcdatamodel; sourceTree = "<group>"; };
+		88C14D14201B567100E42882 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		D1EA48117FF9436725E3EAF9 /* Pods-Quiz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quiz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Quiz/Pods-Quiz.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,6 +168,7 @@
 		88452E0B2008A8CF000AE4B2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				88C14D10201B564600E42882 /* CoreData */,
 				88452E0C2008A8CF000AE4B2 /* DataManager.swift */,
 				88452E0D2008A8CF000AE4B2 /* Network */,
 				88452E122008A8D0000AE4B2 /* QuestionStorage.swift */,
@@ -215,6 +220,15 @@
 				88452E262008A8E0000AE4B2 /* PKHUD+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		88C14D10201B564600E42882 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				88C14D14201B567100E42882 /* CoreDataManager.swift */,
+				88C14D11201B565D00E42882 /* Quiz.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,6 +371,7 @@
 				88452E192008A8D0000AE4B2 /* QuestionStorage.swift in Sources */,
 				88452E182008A8D0000AE4B2 /* NetworkService.swift in Sources */,
 				88452E082008A8C7000AE4B2 /* NavigationBarConfig .swift in Sources */,
+				88C14D13201B565D00E42882 /* Quiz.xcdatamodeld in Sources */,
 				88452E172008A8D0000AE4B2 /* Endpoint.swift in Sources */,
 				88452E012008A8B1000AE4B2 /* AnswerViewController.swift in Sources */,
 				88452E202008A8D6000AE4B2 /* Utils.swift in Sources */,
@@ -370,6 +385,7 @@
 				88452E1A2008A8D0000AE4B2 /* Question.swift in Sources */,
 				88452E1F2008A8D6000AE4B2 /* Constants.swift in Sources */,
 				88452E092008A8C7000AE4B2 /* CategoryCell.swift in Sources */,
+				88C14D15201B567100E42882 /* CoreDataManager.swift in Sources */,
 				88452E162008A8D0000AE4B2 /* QuizEndpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -549,6 +565,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		88C14D11201B565D00E42882 /* Quiz.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				88C14D12201B565D00E42882 /* Quiz.xcdatamodel */,
+			);
+			currentVersion = 88C14D12201B565D00E42882 /* Quiz.xcdatamodel */;
+			path = Quiz.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 88452DD92008A72F000AE4B2 /* Project object */;
 }
