@@ -15,15 +15,31 @@ final class CoreDataManager {
     
     // MARK: - Interface
     var isCategoriesExist: Bool {
-        return false
+        let request: NSFetchRequest<CategoryMO> = CategoryMO.fetchRequest()
+        guard let categoriesCount = try? persistentContainer.viewContext.count(for: request) else {
+            return false
+        }
+        return categoriesCount > 0
     }
     
-    func fetchCategories(complitionHandler: ([Category]) -> Void) {
-        complitionHandler([])
+    /// complitionHandler called in background qeue
+    func fetchCategories(complitionHandler: @escaping ([Category]) -> Void) {
+        persistentContainer.performBackgroundTask { bgContext in
+            let request: NSFetchRequest<CategoryMO> = CategoryMO.fetchRequest()
+            let fetchResult = (try? bgContext.fetch(request)) ?? []
+            let result = fetchResult.map { $0.convertedPlainObject() }
+            complitionHandler(result)
+        }
     }
     
     func saveCategories(_ categories: [Category]) {
-        
+        persistentContainer.performBackgroundTask { bgContext in
+            categories.forEach {
+                let categoryMO = CategoryMO(context: bgContext)
+                categoryMO.setup(from: $0)
+            }
+            try? bgContext.save()
+        }
     }
     
     var isQuestionsExist : Bool {
