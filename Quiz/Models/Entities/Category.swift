@@ -13,9 +13,6 @@ struct Category {
     
     let id: Int
     let name: String
-    let parentCategory: String
-    let questionCount: Int
-    let updateAt: String
 }
 
 extension Category {
@@ -27,8 +24,5 @@ extension Category {
         
         self.id = id
         self.name = name
-        self.parentCategory = json["parent_category"].stringValue
-        self.questionCount = json["question_count"].intValue
-        self.updateAt = json["updatedAt"].stringValue
     }
 }

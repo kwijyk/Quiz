@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 struct Question {
-
+//let category: Category
     let categoryID: Int
     let questionID: Int
     let question: String
