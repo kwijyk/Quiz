@@ -48,23 +48,8 @@ class CategoriesViewController: UIViewController {
         ibTableView.register(CategoryCell.nib, forCellReuseIdentifier: CategoryCell.reuseIdentifier)
     }
     
-//    @objc open var counter123: CGFloat = 0.0
-//
-//    @objc func updateCounter() {
-//        counter123 = counter123 + 0.1
-//        print(counter123)
-//    }
-    
-//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-//        print(counter123)
-//    }
-    
     private func getCategoriesData() {
-//        self.addObserver(self, forKeyPath: #keyPath(counter123), options: [.new, .old, .initial, .prior], context: nil)
-//        let timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
-        
         DataManager.instance.getCategory { [weak self] categories in
-//            timer.invalidate()
             self?.categoriesArray = categories
             self?.ibTableView.reloadData()
         }
