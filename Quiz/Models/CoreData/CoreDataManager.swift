@@ -43,10 +43,19 @@ final class CoreDataManager {
     }
     
     var isQuestionsExist : Bool {
-        return false
+        let request: NSFetchRequest<QuestionMO> = QuestionMO.fetchRequest()
+        guard let questionCount = try? persistentContainer.viewContext.count(for: request) else {
+            return false
+        }
+        return questionCount > 0
     }
     
     func fetchQuestions(for categoryID: Int, complitionHandler: ([Question]) -> Void) {
+        persistentContainer.performBackgroundTask { (bgContext) in
+//            let request: NSFetchRequest<QuestionMO> = QuestionMO.fetchRequest()
+//            let fetchResult = (
+        }
+        
         complitionHandler([])
     }
     
@@ -66,7 +75,7 @@ final class CoreDataManager {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
          */
-        let container = NSPersistentContainer(name: "Uscd")
+        let container = NSPersistentContainer(name: "Quiz")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.

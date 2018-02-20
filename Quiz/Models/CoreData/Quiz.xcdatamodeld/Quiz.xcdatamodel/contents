@@ -13,7 +13,7 @@
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryMO" inverseName="question" inverseEntity="CategoryMO" syncable="YES"/>
     </entity>
     <elements>
-        <element name="QuestionMO" positionX="-2891" positionY="2915" width="128" height="118"/>
         <element name="CategoryMO" positionX="-2682" positionY="2945" width="128" height="88"/>
+        <element name="QuestionMO" positionX="-2891" positionY="2915" width="128" height="118"/>
     </elements>
 </model>

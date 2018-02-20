@@ -27,8 +27,8 @@ class CategoriesViewController: UIViewController, Alertable {
         super.viewDidLoad()
         
         title = "Categories:"
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "ClearStor", style: .plain, target: self, action: #selector(resetDataPressed))
+    
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(resetDataPressed))
         
         setupTableView()
         getCategoriesData()

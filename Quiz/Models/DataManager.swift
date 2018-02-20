@@ -28,7 +28,9 @@ final class DataManager {
         
         if CoreDataManager.instance.isCategoriesExist {
             CoreDataManager.instance.fetchCategories { fetchedCatecories in
-                complition(fetchedCatecories)
+                DispatchQueue.main.async {
+                    complition(fetchedCatecories)
+                }
             }
         } else {
             NetworkService.request(endpoint: QuizEndpoint.categories, completionHandler: { result in
