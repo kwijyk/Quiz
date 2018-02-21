@@ -13,14 +13,6 @@ final class DataManager {
 
     static let instance = DataManager()
     private init() {}
-    private var isDataDownloaded: Bool {
-        set(newBoolValue) {
-            UserDefaults.standard.set(newBoolValue, forKey: Constants.isDataDownloaded)
-        }
-        get {
-            return UserDefaults.standard.bool(forKey: Constants.isDataDownloaded)
-        }
-    }
     
     private(set) var allQuestions: [Question]?
     
@@ -59,7 +51,9 @@ final class DataManager {
     func getQuestions(by category: Category) {
         
         if CoreDataManager.instance.isQuestionsExist {
-            
+            CoreDataManager.instance.fetchQuestions(for: category, complitionHandler: { [unowned self] questions in
+                self.allQuestions = questions
+            })
         } else {
             var questionsArray = [Question]()
             //  https://qriusity.com/v1/categories/8/questions

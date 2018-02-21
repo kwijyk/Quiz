@@ -50,7 +50,7 @@ final class CoreDataManager {
         return questionCount > 0
     }
     
-    func fetchQuestions(for categoryID: Int, complitionHandler: ([Question]) -> Void) {
+    func fetchQuestions(for category: Category, complitionHandler: ([Question]) -> Void) {
         persistentContainer.performBackgroundTask { (bgContext) in
 //            let request: NSFetchRequest<QuestionMO> = QuestionMO.fetchRequest()
 //            let fetchResult = (
@@ -59,11 +59,7 @@ final class CoreDataManager {
         complitionHandler([])
     }
     
-    func saveQuestions(_ questions: [Question], for categoryID: Int) {
-        
-    }
-    
-    func deleteAllData() {
+    func saveQuestions(_ questions: [Question], for category: Category) {
         
     }
     
