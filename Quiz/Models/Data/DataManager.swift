@@ -50,7 +50,7 @@ final class DataManager {
     
     func getQuestions(by category: Category) {
         
-        if CoreDataManager.instance.isQuestionsExist {
+        if CoreDataManager.instance.isQuestionsExist(for: category) {
             CoreDataManager.instance.fetchQuestions(for: category, complitionHandler: { [unowned self] questions in
                 self.allQuestions = questions
             })
@@ -68,7 +68,7 @@ final class DataManager {
                     }
                     self?.allQuestions = questionsArray
                     
-                    CoreDataManager.instance.saveQuestions(questionsArray, for: category.id)
+//                    CoreDataManager.instance.saveQuestions(questionsArray, for: category.id)
                     self?.postMainQueueNotification(withName: .QestionsLoaded)
                 case.failure(let error):
                     print(error)
@@ -79,7 +79,7 @@ final class DataManager {
     }
     
     func clearLocalStorage() {
-        CoreDataManager.instance.deleteAllData()
+//        CoreDataManager.instance.deleteAllData()
     }
     
     private func postMainQueueNotification(withName name: Notification.Name, userInfo: [AnyHashable: Any]? = nil) {

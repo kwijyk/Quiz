@@ -12,57 +12,7 @@ import CoreData
 final class CoreDataManager {
     static let instance = CoreDataManager()
     private init() { }
-    
-    // MARK: - Interface
-    var isCategoriesExist: Bool {
-        let request: NSFetchRequest<CategoryMO> = CategoryMO.fetchRequest()
-        guard let categoriesCount = try? persistentContainer.viewContext.count(for: request) else {
-            return false
-        }
-        return categoriesCount > 0
-    }
-    
-    /// complitionHandler called in background qeue
-    func fetchCategories(complitionHandler: @escaping ([Category]) -> Void) {
-        persistentContainer.performBackgroundTask { bgContext in
-            let request: NSFetchRequest<CategoryMO> = CategoryMO.fetchRequest()
-            let fetchResult = (try? bgContext.fetch(request)) ?? []
-            let result = fetchResult.map { $0.convertedPlainObject() }
-            complitionHandler(result)
-        }
-    }
-    
-    func saveCategories(_ categories: [Category]) {
-        persistentContainer.performBackgroundTask { bgContext in
-            categories.forEach {
-                let categoryMO = CategoryMO(context: bgContext)
-                categoryMO.setup(from: $0)
-            }
-            try? bgContext.save()
-        }
-    }
-    
-    var isQuestionsExist : Bool {
-        let request: NSFetchRequest<QuestionMO> = QuestionMO.fetchRequest()
-        guard let questionCount = try? persistentContainer.viewContext.count(for: request) else {
-            return false
-        }
-        return questionCount > 0
-    }
-    
-    func fetchQuestions(for category: Category, complitionHandler: ([Question]) -> Void) {
-        persistentContainer.performBackgroundTask { (bgContext) in
-//            let request: NSFetchRequest<QuestionMO> = QuestionMO.fetchRequest()
-//            let fetchResult = (
-        }
-        
-        complitionHandler([])
-    }
-    
-    func saveQuestions(_ questions: [Question], for category: Category) {
-        
-    }
-    
+
     // MARK: - Private
     private lazy var persistentContainer: NSPersistentContainer = {
         /*
@@ -105,5 +55,75 @@ final class CoreDataManager {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+}
+
+extension CoreDataManager {
+    
+    // MARK: - Interface
+    var isCategoriesExist: Bool {
+        let request: NSFetchRequest<CategoryMO> = CategoryMO.fetchRequest()
+        guard let categoriesCount = try? persistentContainer.viewContext.count(for: request) else {
+            return false
+        }
+        return categoriesCount > 0
+    }
+    
+    /// complitionHandler called in background qeue
+    func fetchCategories(complitionHandler: @escaping ([Category]) -> Void) {
+        persistentContainer.performBackgroundTask { bgContext in
+            let request: NSFetchRequest<CategoryMO> = CategoryMO.fetchRequest()
+            let fetchResult = (try? bgContext.fetch(request)) ?? []
+            let result = fetchResult.map { $0.convertedPlainObject() }
+            complitionHandler(result)
+        }
+    }
+    
+    func saveCategories(_ categories: [Category]) {
+        persistentContainer.performBackgroundTask { bgContext in
+            categories.forEach {
+                let categoryMO = CategoryMO(context: bgContext)
+                categoryMO.setup(from: $0)
+            }
+            try? bgContext.save()
+        }
+    }
+    
+    func isQuestionsExist(for category: Category) -> Bool {
+        guard let category = fetchCategory(byID: category.id, in: persistentContainer.viewContext),
+              let questions = category.question else { return false }
+        return questions.count > 0
+    }
+    
+    func fetchQuestions(for category: Category, complitionHandler: ([Question]) -> Void) {
+        guard let fetchedCategory = fetchCategory(byID: category.id, in: persistentContainer.viewContext),
+              let questions = fetchedCategory.question as? Set<QuestionMO> else {
+                complitionHandler([])
+                return
+        }
+        let rusult = questions.map { $0.convertedPlainObject() }
+        complitionHandler(rusult)
+    }
+    
+    func saveQuestions(_ questions: [Question], for category: Category) {
+        persistentContainer.performBackgroundTask { bgContext in
+            
+            questions.forEach({ question in
+                let questionMO = QuestionMO(context: bgContext)
+                questionMO.setup(from: question)
+//                questionMO.category = category
+            })
+            
+            try? bgContext.save()
+        }
+        
+    }
+    
+    // MARK: - Private
+    private func fetchCategory(byID categoryID: Int, in context: NSManagedObjectContext) -> CategoryMO?  {
+        let request: NSFetchRequest<CategoryMO> = CategoryMO.fetchRequest()
+        request.predicate = NSPredicate(format: "\(#keyPath(CategoryMO.id)) == \(categoryID)")
+        let categorys = try? context.fetch(request)
+        return categorys?.first
     }
 }
