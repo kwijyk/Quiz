@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D47" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CategoryMO" representedClassName=".CategoryMO" syncable="YES">
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="question" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="QuestionMO" inverseName="category" inverseEntity="QuestionMO" syncable="YES"/>
     </entity>
+    <entity name="OptionMO" representedClassName=".OptionMO" syncable="YES">
+        <attribute name="index" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="optionOfAnswer" attributeType="String" syncable="YES"/>
+        <relationship name="question" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuestionMO" inverseName="options" inverseEntity="QuestionMO" syncable="YES"/>
+    </entity>
     <entity name="QuestionMO" representedClassName=".QuestionMO" syncable="YES">
-        <attribute name="answers" attributeType="Transformable" customClassName="[String]" syncable="YES"/>
         <attribute name="correctAnswerIndex" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="text" attributeType="String" syncable="YES"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryMO" inverseName="question" inverseEntity="CategoryMO" syncable="YES"/>
+        <relationship name="options" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="OptionMO" inverseName="question" inverseEntity="OptionMO" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CategoryMO" positionX="-2682" positionY="2945" width="128" height="88"/>
-        <element name="QuestionMO" positionX="-2891" positionY="2915" width="128" height="118"/>
+        <element name="CategoryMO" positionX="-3069" positionY="2916" width="128" height="88"/>
+        <element name="QuestionMO" positionX="-2862" positionY="2924" width="128" height="118"/>
+        <element name="OptionMO" positionX="-2657" positionY="2927" width="128" height="88"/>
     </elements>
 </model>

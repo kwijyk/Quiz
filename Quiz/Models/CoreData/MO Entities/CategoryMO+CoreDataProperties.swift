@@ -2,7 +2,7 @@
 //  CategoryMO+CoreDataProperties.swift
 //  Quiz
 //
-//  Created by Sergio on 1/26/18.
+//  Created by Sergey Gaponov on 2/25/18.
 //  Copyright © 2018 Sergio. All rights reserved.
 //
 //

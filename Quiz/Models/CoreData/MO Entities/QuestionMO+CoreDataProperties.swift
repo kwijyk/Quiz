@@ -2,7 +2,7 @@
 //  QuestionMO+CoreDataProperties.swift
 //  Quiz
 //
-//  Created by Sergio on 1/26/18.
+//  Created by Sergey Gaponov on 2/25/18.
 //  Copyright © 2018 Sergio. All rights reserved.
 //
 //
@@ -17,9 +17,27 @@ extension QuestionMO {
         return NSFetchRequest<QuestionMO>(entityName: "QuestionMO")
     }
 
+    @NSManaged public var correctAnswerIndex: Int32
     @NSManaged public var id: Int32
     @NSManaged public var text: String?
-    @NSManaged public var correctAnswerIndex: Int32
-    @NSManaged public var answers: [String]?
     @NSManaged public var category: CategoryMO?
+    @NSManaged public var options: NSSet?
+
+}
+
+// MARK: Generated accessors for options
+extension QuestionMO {
+
+    @objc(addOptionsObject:)
+    @NSManaged public func addToOptions(_ value: OptionMO)
+
+    @objc(removeOptionsObject:)
+    @NSManaged public func removeFromOptions(_ value: OptionMO)
+
+    @objc(addOptions:)
+    @NSManaged public func addToOptions(_ values: NSSet)
+
+    @objc(removeOptions:)
+    @NSManaged public func removeFromOptions(_ values: NSSet)
+
 }

@@ -14,14 +14,17 @@ import CoreData
 public class QuestionMO: NSManagedObject {
 
     func convertedPlainObject() -> Question {
-        guard let categoryID = self.category?.id else {
+        guard let categoryID = self.category?.id,
+              let unwOptions = self.options as? Set<OptionMO> else {
             fatalError("Error")
         }
+        let options = unwOptions.sorted { $0.index < $1.index }.flatMap { $0.optionOfAnswer }
+        
         return Question(categoryID: Int(categoryID),
                         questionID: Int(self.id),
                         question: self.text!,
-                        options: self.answers ?? [],
-                        answer: Int(self.correctAnswerIndex) )
+                        options: options,
+                        answer: Int(self.correctAnswerIndex))
     }
     
     func setup(from question: Question) {
@@ -29,6 +32,13 @@ public class QuestionMO: NSManagedObject {
         self.category?.id = Int32(question.categoryID)
         self.text = question.question
         self.correctAnswerIndex = Int32(question.answer)
-        self.answers = question.options
+        
+        question.options.enumerated().forEach { index, option in
+            
+        }
+    
+        let optionMO = options?.enumerated().map {}
+        
+//        self.options = question.options
     }
 }
