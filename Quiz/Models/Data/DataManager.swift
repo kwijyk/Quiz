@@ -53,11 +53,11 @@ final class DataManager {
         if CoreDataManager.instance.isQuestionsExist(for: category) {
             CoreDataManager.instance.fetchQuestions(for: category, complitionHandler: { [unowned self] questions in
                 self.allQuestions = questions
+                self.postMainQueueNotification(withName: .QestionsLoaded)
             })
         } else {
             var questionsArray = [Question]()
-            //  https://qriusity.com/v1/categories/8/questions
-            NetworkService.request(endpoint: QuizEndpoint.questions(category: category), completionHandler: { [weak self] result in
+            NetworkService.request(endpoint: QuizEndpoint.questions(category: category), completionHandler: { [unowned self] result in
                 switch result {
                 case .success(let value):
                     let jsonObj = JSON(value)
@@ -66,21 +66,21 @@ final class DataManager {
                         guard let question = Question(json: objQuestion) else { continue }
                         questionsArray.append(question)
                     }
-                    self?.allQuestions = questionsArray
-                    
-//                    CoreDataManager.instance.saveQuestions(questionsArray, for: category.id)
-                    self?.postMainQueueNotification(withName: .QestionsLoaded)
+                    self.allQuestions = questionsArray
+
+                    CoreDataManager.instance.saveQuestions(questionsArray, for: category)
+                    self.postMainQueueNotification(withName: .QestionsLoaded)
                 case.failure(let error):
                     print(error)
-                    self?.postMainQueueNotification(withName: .DidFailLoadQestions)
+                    self.postMainQueueNotification(withName: .DidFailLoadQestions)
                 }
             })
         }
     }
     
-    func clearLocalStorage() {
+//    func clearLocalStorage() {
 //        CoreDataManager.instance.deleteAllData()
-    }
+//    }
     
     private func postMainQueueNotification(withName name: Notification.Name, userInfo: [AnyHashable: Any]? = nil) {
         DispatchQueue.main.async {

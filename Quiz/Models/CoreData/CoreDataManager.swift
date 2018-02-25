@@ -106,14 +106,14 @@ extension CoreDataManager {
     }
     
     func saveQuestions(_ questions: [Question], for category: Category) {
-        persistentContainer.performBackgroundTask { bgContext in
-            
+        persistentContainer.performBackgroundTask { [unowned self] bgContext in
+            guard let fetchedCategory = self.fetchCategory(byID: category.id, in: bgContext) else { return }
             questions.forEach({ question in
                 let questionMO = QuestionMO(context: bgContext)
                 questionMO.setup(from: question)
-//                questionMO.category = category
+                questionMO.category = fetchedCategory
+                fetchedCategory.addToQuestion(questionMO)
             })
-            
             try? bgContext.save()
         }
         
