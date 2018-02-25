@@ -73,6 +73,8 @@ extension CoreDataManager {
     func fetchCategories(complitionHandler: @escaping ([Category]) -> Void) {
         persistentContainer.performBackgroundTask { bgContext in
             let request: NSFetchRequest<CategoryMO> = CategoryMO.fetchRequest()
+            let sortByName = NSSortDescriptor(key: #keyPath(CategoryMO.name), ascending: true)
+            request.sortDescriptors = [sortByName]
             let fetchResult = (try? bgContext.fetch(request)) ?? []
             let result = fetchResult.map { $0.convertedPlainObject() }
             complitionHandler(result)
@@ -117,6 +119,16 @@ extension CoreDataManager {
             try? bgContext.save()
         }
         
+    }
+    
+    func deleteAllData() {
+//        persistentContainer.performBackgroundTask { bgContext in
+//            let fetchedCategory: [CategoryMO]? = try? bgContext.fetch(CategoryMO.fetchRequest())
+//            fetchedCategory?.forEach { bgContext.delete($0) }
+//            try? bgContext.save()
+//        }
+        let request = NSBatchDeleteRequest(fetchRequest: CategoryMO.fetchRequest())
+        let _ = try? persistentContainer.viewContext.execute(request)
     }
     
     // MARK: - Private

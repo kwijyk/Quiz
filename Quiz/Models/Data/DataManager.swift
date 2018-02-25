@@ -17,7 +17,6 @@ final class DataManager {
     private(set) var allQuestions: [Question]?
     
     func getCategory(complition: @escaping ([Category]) -> Void) {
-        
         if CoreDataManager.instance.isCategoriesExist {
             CoreDataManager.instance.fetchCategories { fetchedCatecories in
                 DispatchQueue.main.async {
@@ -78,9 +77,9 @@ final class DataManager {
         }
     }
     
-//    func clearLocalStorage() {
-//        CoreDataManager.instance.deleteAllData()
-//    }
+    func clearLocalStorage() {
+        CoreDataManager.instance.deleteAllData()
+    }
     
     private func postMainQueueNotification(withName name: Notification.Name, userInfo: [AnyHashable: Any]? = nil) {
         DispatchQueue.main.async {

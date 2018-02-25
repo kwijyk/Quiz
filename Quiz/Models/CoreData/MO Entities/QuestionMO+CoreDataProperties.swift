@@ -22,5 +22,4 @@ extension QuestionMO {
     @NSManaged public var correctAnswerIndex: Int32
     @NSManaged public var answers: [String]?
     @NSManaged public var category: CategoryMO?
-
 }

@@ -37,7 +37,11 @@ class CategoriesViewController: UIViewController, Alertable {
 
     // MARK: - Private methods
     @objc private func resetDataPressed() {
-//        DataManager.instance.clearLocalStorage()
+        DataManager.instance.clearLocalStorage()
+        DataManager.instance.getCategory { [weak self] categories in
+            self?.categoriesArray = categories
+            self?.ibTableView.reloadData()
+        }
         showMessage(title: "Local Storage is cleared")
     }
     

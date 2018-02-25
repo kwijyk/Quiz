@@ -49,7 +49,9 @@ class QuestionViewController: UIViewController, Alertable {
     }
     
     private func getQuestionsData() {
-        HUD.showProgress()
+        if !CoreDataManager.instance.isQuestionsExist(for: category) {
+            HUD.showProgress()
+        }
         DataManager.instance.getQuestions(by: category)
     }
     
