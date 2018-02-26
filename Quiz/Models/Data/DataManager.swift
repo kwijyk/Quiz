@@ -26,12 +26,10 @@ final class DataManager {
         } else {
             NetworkService.request(endpoint: QuizEndpoint.categories, completionHandler: { result in
                 switch result {
-                    
                 case .success(let value):
                     let jsonObj = JSON(value)
                     guard let jsonArray = jsonObj.array else { return }
                     var categoriesArray = [Category]()
-                    
                     for objCategory in jsonArray {
                         guard let category = Category(json: objCategory) else { continue }
                         categoriesArray.append(category)
@@ -75,6 +73,26 @@ final class DataManager {
                 }
             })
         }
+    }
+    
+    func getRandomQuestions(complition: @escaping ([Question]) -> Void) {
+        NetworkService.request(endpoint: QuizEndpoint.randomQuestions, completionHandler: { result in
+            switch result {
+            case .success(let value):
+                let jsonObj = JSON(value)
+                guard let jsonArray = jsonObj.array else { return }
+                var questionsArray = [Question]()
+                for objQuestion in jsonArray {
+                    guard let question = Question(json: objQuestion) else { continue }
+                    questionsArray.append(question)
+                }
+                DispatchQueue.main.async {
+                    complition(questionsArray)
+                }
+            case.failure(let error):
+                print(error)
+            }
+        })
     }
     
     func clearLocalStorage() {

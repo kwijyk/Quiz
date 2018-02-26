@@ -12,7 +12,7 @@ import PKHUD
 class QuestionViewController: UIViewController, Alertable {
 
     @IBOutlet private weak var ibTableView: UITableView!
-    private let category: Category
+    private let category: Category?
     private let nameCategory: String
     private var questionsArray = [Question]() {
         didSet {
@@ -20,7 +20,7 @@ class QuestionViewController: UIViewController, Alertable {
         }
     }
 
-    init(category: Category, nameCategory: String) {
+    init(category: Category? = nil, nameCategory: String) {
         self.category = category
         self.nameCategory = nameCategory
         super.init(nibName: nil, bundle: nil)
