@@ -15,10 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let initVC = CategoriesViewController()
-        let navVC = UINavigationController(rootViewController: initVC)
+        GlobalAppearance.configure()
+        let containerVC = ContainerViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = navVC
+        window?.rootViewController = containerVC
         window?.makeKeyAndVisible()
         NavigationBarConfig.setupNavigatioBar()
         return true

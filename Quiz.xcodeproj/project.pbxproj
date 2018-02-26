@@ -39,6 +39,8 @@
 		88C14D1D201B5D4A00E42882 /* QuestionMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D19201B5D4A00E42882 /* QuestionMO+CoreDataProperties.swift */; };
 		88C14D1E201B5D4A00E42882 /* CategoryMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D1A201B5D4A00E42882 /* CategoryMO+CoreDataClass.swift */; };
 		88C14D1F201B5D4A00E42882 /* CategoryMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D1B201B5D4A00E42882 /* CategoryMO+CoreDataProperties.swift */; };
+		88D183FC2044640A001A0A8D /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D183FB2044640A001A0A8D /* ContainerViewController.swift */; };
+		88D1840120446FA4001A0A8D /* GlobalApperance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D1840020446FA4001A0A8D /* GlobalApperance.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +79,8 @@
 		88C14D19201B5D4A00E42882 /* QuestionMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		88C14D1A201B5D4A00E42882 /* CategoryMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		88C14D1B201B5D4A00E42882 /* CategoryMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		88D183FB2044640A001A0A8D /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		88D1840020446FA4001A0A8D /* GlobalApperance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalApperance.swift; sourceTree = "<group>"; };
 		D1EA48117FF9436725E3EAF9 /* Pods-Quiz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quiz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Quiz/Pods-Quiz.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,12 +159,10 @@
 		88452DF72008A8B1000AE4B2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				88452DFD2008A8B1000AE4B2 /* CategoriesViewController.swift */,
-				88452DF92008A8B1000AE4B2 /* CategoriesViewController.xib */,
-				88452DF82008A8B1000AE4B2 /* QuestionViewController.swift */,
-				88452DFC2008A8B1000AE4B2 /* QuestionViewController.xib */,
-				88452DFB2008A8B1000AE4B2 /* AnswerViewController.swift */,
-				88452DFA2008A8B1000AE4B2 /* AnswerViewController.xib */,
+				88D183FB2044640A001A0A8D /* ContainerViewController.swift */,
+				88D183FD20446423001A0A8D /* Categries */,
+				88D183FE2044643B001A0A8D /* Questions */,
+				88D183FF204464BD001A0A8D /* Answers */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				88452E1E2008A8D6000AE4B2 /* Utils.swift */,
+				88D1840020446FA4001A0A8D /* GlobalApperance.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -268,6 +271,33 @@
 				88452E122008A8D0000AE4B2 /* QuestionStorage.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		88D183FD20446423001A0A8D /* Categries */ = {
+			isa = PBXGroup;
+			children = (
+				88452DFD2008A8B1000AE4B2 /* CategoriesViewController.swift */,
+				88452DF92008A8B1000AE4B2 /* CategoriesViewController.xib */,
+			);
+			path = Categries;
+			sourceTree = "<group>";
+		};
+		88D183FE2044643B001A0A8D /* Questions */ = {
+			isa = PBXGroup;
+			children = (
+				88452DF82008A8B1000AE4B2 /* QuestionViewController.swift */,
+				88452DFC2008A8B1000AE4B2 /* QuestionViewController.xib */,
+			);
+			path = Questions;
+			sourceTree = "<group>";
+		};
+		88D183FF204464BD001A0A8D /* Answers */ = {
+			isa = PBXGroup;
+			children = (
+				88452DFB2008A8B1000AE4B2 /* AnswerViewController.swift */,
+				88452DFA2008A8B1000AE4B2 /* AnswerViewController.xib */,
+			);
+			path = Answers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -408,6 +438,7 @@
 			files = (
 				88452E282008A8E0000AE4B2 /* PKHUD+Extension.swift in Sources */,
 				88452E192008A8D0000AE4B2 /* QuestionStorage.swift in Sources */,
+				88D183FC2044640A001A0A8D /* ContainerViewController.swift in Sources */,
 				88452E182008A8D0000AE4B2 /* NetworkService.swift in Sources */,
 				88C14D1F201B5D4A00E42882 /* CategoryMO+CoreDataProperties.swift in Sources */,
 				88452E082008A8C7000AE4B2 /* NavigationBarConfig .swift in Sources */,
@@ -416,6 +447,7 @@
 				88452E012008A8B1000AE4B2 /* AnswerViewController.swift in Sources */,
 				88C14D1D201B5D4A00E42882 /* QuestionMO+CoreDataProperties.swift in Sources */,
 				88452E202008A8D6000AE4B2 /* Utils.swift in Sources */,
+				88D1840120446FA4001A0A8D /* GlobalApperance.swift in Sources */,
 				88452E232008A8DC000AE4B2 /* Alertable.swift in Sources */,
 				88452E272008A8E0000AE4B2 /* Notification+Extansion.swift in Sources */,
 				88452DFE2008A8B1000AE4B2 /* QuestionViewController.swift in Sources */,

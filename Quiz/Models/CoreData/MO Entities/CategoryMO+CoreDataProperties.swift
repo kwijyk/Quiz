@@ -20,7 +20,7 @@ extension CategoryMO {
     @NSManaged public var id: Int32
     @NSManaged public var name: String?
     @NSManaged public var question: NSSet?
-
+    
 }
 
 // MARK: Generated accessors for question

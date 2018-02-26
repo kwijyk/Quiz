@@ -13,7 +13,7 @@ struct NetworkService {
     
     private static var baseURL: String { return "https://qriusity.com/v1/" }
     
-    // CompletionHandler porformed NOT in the main thread
+    /// CompletionHandler porformed NOT in the main thread
     static func request(endpoint: Endpoint, completionHandler: ((Result<Any>) -> Void)? = nil) {
         
         let encoding: ParameterEncoding = (endpoint.method == .get || endpoint.method == .delete) ? URLEncoding.default : JSONEncoding.default

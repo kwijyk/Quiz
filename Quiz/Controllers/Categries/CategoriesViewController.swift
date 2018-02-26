@@ -46,6 +46,7 @@ class CategoriesViewController: UIViewController, Alertable {
     }
     
     private func setupProgressView() {
+        tabBarController?.tabBar.isHidden = true
         ibProgressView.isHidden = false
         gameTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
         ibProgressView.layer.addSublayer(semiCircleLayer)
@@ -85,7 +86,8 @@ class CategoriesViewController: UIViewController, Alertable {
         
         if endAngel >= CGFloat(Double.pi * 1.5) {
             gameTimer.invalidate()
-           ibProgressView.isHidden = true
+            ibProgressView.isHidden = true
+            tabBarController?.tabBar.isHidden = false
         }
     }
 }
