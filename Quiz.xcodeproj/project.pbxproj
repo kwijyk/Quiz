@@ -39,7 +39,6 @@
 		88C14D1D201B5D4A00E42882 /* QuestionMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D19201B5D4A00E42882 /* QuestionMO+CoreDataProperties.swift */; };
 		88C14D1E201B5D4A00E42882 /* CategoryMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D1A201B5D4A00E42882 /* CategoryMO+CoreDataClass.swift */; };
 		88C14D1F201B5D4A00E42882 /* CategoryMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D1B201B5D4A00E42882 /* CategoryMO+CoreDataProperties.swift */; };
-		88D183FA2044171F001A0A8D /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D183F92044171F001A0A8D /* Option.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,7 +77,6 @@
 		88C14D19201B5D4A00E42882 /* QuestionMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		88C14D1A201B5D4A00E42882 /* CategoryMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		88C14D1B201B5D4A00E42882 /* CategoryMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		88D183F92044171F001A0A8D /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		D1EA48117FF9436725E3EAF9 /* Pods-Quiz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quiz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Quiz/Pods-Quiz.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -267,7 +265,6 @@
 			children = (
 				88452E142008A8D0000AE4B2 /* Category.swift */,
 				88452E132008A8D0000AE4B2 /* Question.swift */,
-				88D183F92044171F001A0A8D /* Option.swift */,
 				88452E122008A8D0000AE4B2 /* QuestionStorage.swift */,
 			);
 			path = Entities;
@@ -429,7 +426,6 @@
 				88452DE52008A72F000AE4B2 /* AppDelegate.swift in Sources */,
 				88452E1B2008A8D0000AE4B2 /* Category.swift in Sources */,
 				88452E1A2008A8D0000AE4B2 /* Question.swift in Sources */,
-				88D183FA2044171F001A0A8D /* Option.swift in Sources */,
 				88452E092008A8C7000AE4B2 /* CategoryCell.swift in Sources */,
 				88C14D1C201B5D4A00E42882 /* QuestionMO+CoreDataClass.swift in Sources */,
 				88C14D15201B567100E42882 /* CoreDataManager.swift in Sources */,

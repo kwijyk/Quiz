@@ -115,6 +115,14 @@ extension CoreDataManager {
                 questionMO.setup(from: question)
                 questionMO.category = fetchedCategory
                 fetchedCategory.addToQuestion(questionMO)
+                
+                question.options.enumerated().forEach { (index, option) in
+                    let optionMO = OptionMO(context: bgContext)
+                    optionMO.index = Int32(index)
+                    optionMO.optionOfAnswer = option
+                    optionMO.question = questionMO
+                    questionMO.addToOptions(optionMO)
+                }
             })
             try? bgContext.save()
         }
