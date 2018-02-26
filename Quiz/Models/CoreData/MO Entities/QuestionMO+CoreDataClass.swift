@@ -32,13 +32,5 @@ public class QuestionMO: NSManagedObject {
         self.category?.id = Int32(question.categoryID)
         self.text = question.question
         self.correctAnswerIndex = Int32(question.answer)
-        
-        question.options.enumerated().forEach { index, option in
-            
-        }
-    
-        let optionMO = options?.enumerated().map {}
-        
-//        self.options = question.options
     }
 }

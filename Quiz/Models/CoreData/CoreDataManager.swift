@@ -118,7 +118,6 @@ extension CoreDataManager {
             })
             try? bgContext.save()
         }
-        
     }
     
     func deleteAllData() {

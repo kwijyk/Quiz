@@ -14,7 +14,7 @@ struct Question {
     let categoryID: Int
     let questionID: Int
     let question: String
-    let options: [String]
+    let options: [Option]
     
     let answer: Int
 }
@@ -31,13 +31,13 @@ extension Question {
         self.question = question
         self.answer = json["answers"].intValue - 1
         
-        var currentAnswers: [String] = []
+        var currentAnswers: [Option] = []
         var optionIndex = 1
-        while let option = json["option\(optionIndex)"].string {
+        while let optionOfAnswer = json["option\(optionIndex)"].string {
+            let option = Option(index: optionIndex, optionOfAnswer: optionOfAnswer)
             currentAnswers.append(option)
             optionIndex += 1
         }
-        currentAnswers.append("test")
         self.options = currentAnswers
     }
 }

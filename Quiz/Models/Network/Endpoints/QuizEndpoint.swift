@@ -12,7 +12,6 @@ import Alamofire
 enum QuizEndpoint: Endpoint {
     case categories
     case questions(category: Category)
-    
 }
 
 // MARK: - Endpoint
