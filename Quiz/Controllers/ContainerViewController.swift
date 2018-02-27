@@ -17,7 +17,7 @@ class ContainerViewController: UITabBarController {
         let navCategoriesVC = UINavigationController(rootViewController: categoriesVC)
         navCategoriesVC.tabBarItem = UITabBarItem(title: "Categories", image: #imageLiteral(resourceName: "icon_categories"), tag: 0)
         
-        let randomQuestionVC = QuestionViewController(category: Category(id: 1, name: "SomeName"), nameCategory: "String")
+        let randomQuestionVC = QuestionViewController(nameCategory: "Play")
         let navRandomQuestionVC = UINavigationController(rootViewController: randomQuestionVC)
         navRandomQuestionVC.tabBarItem = UITabBarItem(title: "Play", image: #imageLiteral(resourceName: "icon_random"), tag: 1)
     

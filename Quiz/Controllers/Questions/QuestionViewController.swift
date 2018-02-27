@@ -49,12 +49,22 @@ class QuestionViewController: UIViewController, Alertable {
     }
     
     private func getQuestionsData() {
-        if !CoreDataManager.instance.isQuestionsExist(for: category) {
+        
+        if let unwCategoty = category {
+            if !CoreDataManager.instance.isQuestionsExist(for: unwCategoty) {
+                HUD.showProgress()
+            }
+            DataManager.instance.getQuestions(by: unwCategoty)
+        } else {
             HUD.showProgress()
-        }
-        DataManager.instance.getQuestions(by: category)
-    }
+            DataManager.instance.getRandomQuestions(complition: { [unowned self] qustions in
+                HUD.hide()
+                self.questionsArray = qustions
+            })
     
+        }
+    }
+        
     private func addNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(questionsLoaded), name: .QestionsLoaded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didFinishLoadQuestion), name: .DidFailLoadQestions, object: nil)
