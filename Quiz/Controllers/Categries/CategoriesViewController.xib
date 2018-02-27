@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CategoriesViewController" customModule="Quiz" customModuleProvider="target">
             <connections>
-                <outlet property="ibProgressView" destination="yVn-e3-her" id="s5s-ww-Liv"/>
                 <outlet property="ibTableView" destination="rsg-lt-Z2f" id="OBn-Cg-Oxk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -33,10 +32,6 @@
                     <rect key="frame" x="0.0" y="21" width="375" height="646"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yVn-e3-her">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" red="0.16862745098039217" green="0.16862745098039217" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -44,13 +39,9 @@
                 <constraint firstItem="rsg-lt-Z2f" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7lN-sj-oKx"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="rsg-lt-Z2f" secondAttribute="bottom" id="ATY-ci-Y1G"/>
                 <constraint firstItem="g8B-uQ-fPM" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="-30" id="PZZ-Oj-hAH"/>
-                <constraint firstItem="yVn-e3-her" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="S8d-mZ-bF5"/>
-                <constraint firstItem="yVn-e3-her" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YIi-vW-QkA"/>
                 <constraint firstItem="g8B-uQ-fPM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="b4V-Ra-OqX"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="yVn-e3-her" secondAttribute="bottom" id="fM4-B5-IV5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="g8B-uQ-fPM" secondAttribute="trailing" id="jAw-tQ-oqL"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rsg-lt-Z2f" secondAttribute="trailing" id="jax-4b-O9K"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yVn-e3-her" secondAttribute="trailing" id="vxl-xg-L4H"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="-140.5" y="-50.5"/>

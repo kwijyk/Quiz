@@ -7,12 +7,10 @@
 //
 
 import UIKit
-import Foundation
+import PKHUD
 
 class CategoriesViewController: UIViewController, Alertable {
 
-    
-    @IBOutlet private weak var ibProgressView: UIView!
     @IBOutlet private weak var ibTableView: UITableView!
     
     private var gameTimer: Timer!
@@ -32,7 +30,6 @@ class CategoriesViewController: UIViewController, Alertable {
         
         setupTableView()
         getCategoriesData()
-        setupProgressView()
     }
 
     // MARK: - Private methods
@@ -45,13 +42,6 @@ class CategoriesViewController: UIViewController, Alertable {
         showMessage(title: "Local Storage is cleared")
     }
     
-    private func setupProgressView() {
-        tabBarController?.tabBar.isHidden = true
-        ibProgressView.isHidden = false
-        gameTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
-        ibProgressView.layer.addSublayer(semiCircleLayer)
-    }
-    
     private func setupTableView() {
         ibTableView.delegate = self
         ibTableView.dataSource = self
@@ -62,7 +52,9 @@ class CategoriesViewController: UIViewController, Alertable {
     }
     
     private func getCategoriesData() {
+        HUD.showProgress()
         DataManager.instance.getCategory { [weak self] categories in
+            HUD.hide()
             self?.categoriesArray = categories
             self?.ibTableView.reloadData()
         }
@@ -70,25 +62,6 @@ class CategoriesViewController: UIViewController, Alertable {
     
     private func getCategory(indexPath: IndexPath) -> Category? {
         return categoriesArray[indexPath.row]
-    }
-    
-    @objc func runTimedCode() {
-        endAngel = endAngel + CGFloat(Double.pi / 180)
-        
-        let circlePath = UIBezierPath(arcCenter: ibProgressView.center, radius: CGFloat(radius), startAngle: startAngel, endAngle: endAngel, clockwise: true)
-        
-        semiCircleLayer.path = circlePath.cgPath
-        semiCircleLayer.strokeColor = UIColor.init(red: 184/255, green: 250/255, blue: 236/255, alpha: 1).cgColor
-        semiCircleLayer.fillColor = UIColor.clear.cgColor
-        semiCircleLayer.lineWidth = 4
-        semiCircleLayer.strokeStart = 0
-        semiCircleLayer.strokeEnd  = 1
-        
-        if endAngel >= CGFloat(Double.pi * 1.5) {
-            gameTimer.invalidate()
-            ibProgressView.isHidden = true
-            tabBarController?.tabBar.isHidden = false
-        }
     }
 }
 
