@@ -16,7 +16,7 @@ final class DataManager {
     
     private(set) var allQuestions: [Question]?
     
-    func getCategory(complition: @escaping ([Category]) -> Void) {
+    func getCategory(page: Int, complition: @escaping ([Category]) -> Void) {
         if CoreDataManager.instance.isCategoriesExist {
             CoreDataManager.instance.fetchCategories { fetchedCatecories in
                 DispatchQueue.main.async {
@@ -24,24 +24,32 @@ final class DataManager {
                 }
             }
         } else {
-            NetworkService.request(endpoint: QuizEndpoint.categories, completionHandler: { result in
-                switch result {
-                case .success(let value):
-                    let jsonObj = JSON(value)
-                    guard let jsonArray = jsonObj.array else { return }
-                    var categoriesArray = [Category]()
-                    for objCategory in jsonArray {
-                        guard let category = Category(json: objCategory) else { continue }
-                        categoriesArray.append(category)
-                    }
-                    CoreDataManager.instance.saveCategories(categoriesArray)
-                    DispatchQueue.main.async {
-                        complition(categoriesArray)
-                    }
-                case.failure(let error):
-                    print(error)
+            
+            requstCategoryFromNetwork(page: 1, complition: { categories in
+                DispatchQueue.main.async {
+                    complition(categories)
                 }
             })
+        
+            
+//            NetworkService.request(endpoint: QuizEndpoint.categories(page: page), completionHandler: { result in
+//                switch result {
+//                case .success(let value):
+//                    let jsonObj = JSON(value)
+//                    guard let jsonArray = jsonObj.array else { return }
+//                    var categoriesArray = [Category]()
+//                    for objCategory in jsonArray {
+//                        guard let category = Category(json: objCategory) else { continue }
+//                        categoriesArray.append(category)
+//                    }
+//                    CoreDataManager.instance.saveCategories(categoriesArray)
+//                    DispatchQueue.main.async {
+//                        complition(categoriesArray)
+//                    }
+//                case.failure(let error):
+//                    print(error)
+//                }
+//            })
         }
     }
     
@@ -103,5 +111,31 @@ final class DataManager {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: name, object: nil, userInfo: userInfo)
         }
+    }
+    
+    private func requstCategoryFromNetwork(page: Int, complition: @escaping ([Category]) -> Void) {
+        NetworkService.request(endpoint: QuizEndpoint.categories(page: page), completionHandler: { [unowned self] result in
+            switch result {
+            case .success(let value):
+                let jsonObj = JSON(value)
+                guard let jsonArray = jsonObj.array else { return }
+                
+                var categoriesArray = [Category]()
+                for objCategory in jsonArray {
+                    guard let category = Category(json: objCategory) else { continue }
+                    categoriesArray.append(category)
+                }
+                
+                self.requstCategoryFromNetwork(page: page + 1, complition: { categories in
+                    
+                    if categories.isEmpty { return }
+                    categoriesArray.append(contentsOf: categories)
+                    complition(categoriesArray)
+                })
+                
+            case.failure(let error):
+                print(error)
+            }
+        })
     }
 }

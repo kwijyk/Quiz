@@ -33,6 +33,7 @@
 		88452E232008A8DC000AE4B2 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E222008A8DC000AE4B2 /* Alertable.swift */; };
 		88452E272008A8E0000AE4B2 /* Notification+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E252008A8E0000AE4B2 /* Notification+Extansion.swift */; };
 		88452E282008A8E0000AE4B2 /* PKHUD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E262008A8E0000AE4B2 /* PKHUD+Extension.swift */; };
+		88C0D3772046B89D0029D6ED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C0D3762046B89D0029D6ED /* Constants.swift */; };
 		88C14D13201B565D00E42882 /* Quiz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D11201B565D00E42882 /* Quiz.xcdatamodeld */; };
 		88C14D15201B567100E42882 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D14201B567100E42882 /* CoreDataManager.swift */; };
 		88C14D1C201B5D4A00E42882 /* QuestionMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D18201B5D4A00E42882 /* QuestionMO+CoreDataClass.swift */; };
@@ -73,6 +74,7 @@
 		88452E222008A8DC000AE4B2 /* Alertable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		88452E252008A8E0000AE4B2 /* Notification+Extansion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification+Extansion.swift"; sourceTree = "<group>"; };
 		88452E262008A8E0000AE4B2 /* PKHUD+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PKHUD+Extension.swift"; sourceTree = "<group>"; };
+		88C0D3762046B89D0029D6ED /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		88C14D12201B565D00E42882 /* Quiz.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Quiz.xcdatamodel; sourceTree = "<group>"; };
 		88C14D14201B567100E42882 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		88C14D18201B5D4A00E42882 /* QuestionMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionMO+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				88452E0C2008A8CF000AE4B2 /* DataManager.swift */,
+				88C0D3762046B89D0029D6ED /* Constants.swift */,
 				88C14D17201B5A1500E42882 /* Entities */,
 			);
 			path = Data;
@@ -447,6 +450,7 @@
 				88452E012008A8B1000AE4B2 /* AnswerViewController.swift in Sources */,
 				88C14D1D201B5D4A00E42882 /* QuestionMO+CoreDataProperties.swift in Sources */,
 				88452E202008A8D6000AE4B2 /* Utils.swift in Sources */,
+				88C0D3772046B89D0029D6ED /* Constants.swift in Sources */,
 				88D1840120446FA4001A0A8D /* GlobalApperance.swift in Sources */,
 				88452E232008A8DC000AE4B2 /* Alertable.swift in Sources */,
 				88452E272008A8E0000AE4B2 /* Notification+Extansion.swift in Sources */,

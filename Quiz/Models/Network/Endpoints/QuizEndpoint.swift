@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 enum QuizEndpoint: Endpoint {
-    case categories
+    case categories(page: Int)
     case questions(category: Category)
     case randomQuestions
 }
@@ -35,6 +35,8 @@ extension QuizEndpoint {
 
     var parameters: [String : Any]? {
         switch self {
+        case .categories(let page):
+            return ["page": page, "limit": Constants.numberOfItemInPage]
         case .randomQuestions:
             return ["page": 3, "limit": 4]
         default:

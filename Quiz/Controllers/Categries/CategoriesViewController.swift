@@ -12,13 +12,7 @@ import PKHUD
 class CategoriesViewController: UIViewController, Alertable {
 
     @IBOutlet private weak var ibTableView: UITableView!
-    
-    private var gameTimer: Timer!
-    private var semiCircleLayer = CAShapeLayer()
-    private let radius = 105
-    private let startAngel = CGFloat( -Double.pi / 2)
-    private var endAngel = CGFloat( -Double.pi / 2)
-    
+        
     private var categoriesArray: [Category] = []
     
     override func viewDidLoad() {
@@ -35,10 +29,10 @@ class CategoriesViewController: UIViewController, Alertable {
     // MARK: - Private methods
     @objc private func resetDataPressed() {
         DataManager.instance.clearLocalStorage()
-        DataManager.instance.getCategory { [weak self] categories in
+        DataManager.instance.getCategory(page: 3, complition: { [weak self] categories in
             self?.categoriesArray = categories
             self?.ibTableView.reloadData()
-        }
+        })
         showMessage(title: "Local Storage is cleared")
     }
     
@@ -53,11 +47,11 @@ class CategoriesViewController: UIViewController, Alertable {
     
     private func getCategoriesData() {
         HUD.showProgress()
-        DataManager.instance.getCategory { [weak self] categories in
+        DataManager.instance.getCategory(page: 3, complition: { [weak self] categories in
             HUD.hide()
             self?.categoriesArray = categories
             self?.ibTableView.reloadData()
-        }
+        })
     }
     
     private func getCategory(indexPath: IndexPath) -> Category? {
