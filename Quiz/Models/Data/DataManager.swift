@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import CoreData
 
 final class DataManager {
 
@@ -25,31 +26,31 @@ final class DataManager {
             }
         } else {
             
-            requstCategoryFromNetwork(page: 1, complition: { categories in
-                DispatchQueue.main.async {
-                    complition(categories)
-                }
-            })
-        
-            
-//            NetworkService.request(endpoint: QuizEndpoint.categories(page: page), completionHandler: { result in
-//                switch result {
-//                case .success(let value):
-//                    let jsonObj = JSON(value)
-//                    guard let jsonArray = jsonObj.array else { return }
-//                    var categoriesArray = [Category]()
-//                    for objCategory in jsonArray {
-//                        guard let category = Category(json: objCategory) else { continue }
-//                        categoriesArray.append(category)
-//                    }
-//                    CoreDataManager.instance.saveCategories(categoriesArray)
-//                    DispatchQueue.main.async {
-//                        complition(categoriesArray)
-//                    }
-//                case.failure(let error):
-//                    print(error)
+//            requstCategoryFromNetwork(page: 1, complition: { categories in
+//                DispatchQueue.main.async {
+//                    complition(categories)
 //                }
 //            })
+        
+            
+            NetworkService.request(endpoint: QuizEndpoint.categories(page: page), completionHandler: { result in
+                switch result {
+                case .success(let value):
+                    let jsonObj = JSON(value)
+                    guard let jsonArray = jsonObj.array else { return }
+                    var categoriesArray = [Category]()
+                    for objCategory in jsonArray {
+                        guard let category = Category(json: objCategory) else { continue }
+                        categoriesArray.append(category)
+                    }
+                    CoreDataManager.instance.saveCategories(categoriesArray)
+                    DispatchQueue.main.async {
+                        complition(categoriesArray)
+                    }
+                case.failure(let error):
+                    print(error)
+                }
+            })
         }
     }
     
