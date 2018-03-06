@@ -18,8 +18,9 @@ struct QuestionStorage {
         guard let question = questionData["question"] as? String else { return nil }
         guard let options = questionData["options"] as? [String] else { return nil }
         guard let answer = questionData["answer"] as? Int else { return nil }
+        guard let page = questionData["page"] as? Int else { return nil }
         
-        let questionObj = Question(categoryID: categoryID, questionID: questionID, question: question, options: options, answer: answer)
+        let questionObj = Question(categoryID: categoryID, questionID: questionID, page: page, question: question, options: options, answer: answer)
         
         return questionObj
     }

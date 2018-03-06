@@ -2,7 +2,7 @@
 //  CategoryMO+CoreDataProperties.swift
 //  Quiz
 //
-//  Created by Sergey Gaponov on 2/25/18.
+//  Created by Sergio on 3/6/18.
 //  Copyright © 2018 Sergio. All rights reserved.
 //
 //
@@ -19,8 +19,9 @@ extension CategoryMO {
 
     @NSManaged public var id: Int32
     @NSManaged public var name: String?
+    @NSManaged public var page: Int32
     @NSManaged public var question: NSSet?
-    
+
 }
 
 // MARK: Generated accessors for question

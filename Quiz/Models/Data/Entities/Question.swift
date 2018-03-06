@@ -13,6 +13,7 @@ struct Question {
 //let category: Category
     let categoryID: Int
     let questionID: Int
+    let page: Int
     let question: String
     let options: [String]
     
@@ -21,7 +22,7 @@ struct Question {
 
 extension Question {
     
-    init?(json: JSON) {
+    init?(json: JSON, page: Int) {
         guard let categoryID = json["category", "id"].int,
               let questionID = json["id"].int,
               let question = json["question"].string else { return nil }
@@ -38,6 +39,7 @@ extension Question {
             optionIndex += 1
         }
         self.options = currentAnswers
+        self.page = page
     }
 }
 

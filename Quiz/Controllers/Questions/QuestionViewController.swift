@@ -54,10 +54,10 @@ class QuestionViewController: UIViewController, Alertable {
             if !CoreDataManager.instance.isQuestionsExist(for: unwCategoty) {
                 HUD.showProgress()
             }
-            DataManager.instance.getQuestions(by: unwCategoty)
+            DataManager.instance.getQuestions(by: unwCategoty, page: 1)
         } else {
             HUD.showProgress()
-            DataManager.instance.getRandomQuestions(complition: { [unowned self] qustions in
+            DataManager.instance.getRandomQuestions(page: 1, complition: { [unowned self] qustions in
                 HUD.hide()
                 self.questionsArray = qustions
             })

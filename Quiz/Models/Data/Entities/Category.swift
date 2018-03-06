@@ -12,17 +12,19 @@ import SwiftyJSON
 struct Category {
     
     let id: Int
+    let page: Int
     let name: String
 }
 
 extension Category {
     
-    init?(json: JSON) {
+    init?(json: JSON, page: Int) {
         
         guard let id = json["id"].int,
               let name = json["name"].string else { return nil }
         
         self.id = id
         self.name = name
+        self.page = page
     }
 }

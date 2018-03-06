@@ -2,7 +2,7 @@
 //  OptionMO+CoreDataProperties.swift
 //  Quiz
 //
-//  Created by Sergey Gaponov on 2/25/18.
+//  Created by Sergio on 3/6/18.
 //  Copyright © 2018 Sergio. All rights reserved.
 //
 //

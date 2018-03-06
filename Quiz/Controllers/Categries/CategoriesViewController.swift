@@ -29,7 +29,7 @@ class CategoriesViewController: UIViewController, Alertable {
     // MARK: - Private methods
     @objc private func resetDataPressed() {
         DataManager.instance.clearLocalStorage()
-        DataManager.instance.getCategory(page: 1, complition: { [weak self] categories in
+        DataManager.instance.getCategory(page: 4, complition: { [weak self] categories in
             self?.categoriesArray = categories
             self?.ibTableView.reloadData()
         })
@@ -46,12 +46,14 @@ class CategoriesViewController: UIViewController, Alertable {
     }
     
     private func getCategoriesData() {
-        HUD.showProgress()
-        DataManager.instance.getCategory(page: 1, complition: { [weak self] categories in
-            HUD.hide()
-            self?.categoriesArray = categories
-            self?.ibTableView.reloadData()
-        })
+        HUD.showProgress()        
+        CoreDataManager.instance.fetchCategories { [weak self] fetchedCatecories in
+            self?.categoriesArray = fetchedCatecories
+            DispatchQueue.main.async {
+                HUD.hide()
+                self?.ibTableView.reloadData()
+            }
+        }
     }
     
     private func getCategory(indexPath: IndexPath) -> Category? {

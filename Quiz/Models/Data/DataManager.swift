@@ -18,13 +18,13 @@ final class DataManager {
     private(set) var allQuestions: [Question]?
     
     func getCategory(page: Int, complition: @escaping ([Category]) -> Void) {
-        if CoreDataManager.instance.isCategoriesExist {
-            CoreDataManager.instance.fetchCategories { fetchedCatecories in
-                DispatchQueue.main.async {
-                    complition(fetchedCatecories)
-                }
-            }
-        } else {
+//        if CoreDataManager.instance.isCategoriesExist {
+//            CoreDataManager.instance.fetchCategories { fetchedCatecories in
+//                DispatchQueue.main.async {
+//                    complition(fetchedCatecories)
+//                }
+//            }
+//        } else {
 //            requstCategoryFromNetwork(page: 1, complition: { categories in
 //                DispatchQueue.main.async {
 //                    complition(categories)
@@ -38,7 +38,7 @@ final class DataManager {
                     guard let jsonArray = jsonObj.array else { return }
                     var categoriesArray = [Category]()
                     for objCategory in jsonArray {
-                        guard let category = Category(json: objCategory) else { continue }
+                        guard let category = Category(json: objCategory, page: page) else { continue }
                         categoriesArray.append(category)
                     }
                     CoreDataManager.instance.saveCategories(categoriesArray)
@@ -49,10 +49,10 @@ final class DataManager {
                     print(error)
                 }
             })
-        }
+//        }
     }
     
-    func getQuestions(by category: Category) {
+    func getQuestions(by category: Category, page: Int) {
         
         if CoreDataManager.instance.isQuestionsExist(for: category) {
             CoreDataManager.instance.fetchQuestions(for: category, complitionHandler: { [unowned self] questions in
@@ -67,7 +67,7 @@ final class DataManager {
                     let jsonObj = JSON(value)
                     guard let jsonArray = jsonObj.array else { return }
                     for objQuestion in jsonArray {
-                        guard let question = Question(json: objQuestion) else { continue }
+                        guard let question = Question(json: objQuestion, page: page) else { continue }
                         questionsArray.append(question)
                     }
                     self.allQuestions = questionsArray
@@ -82,7 +82,7 @@ final class DataManager {
         }
     }
     
-    func getRandomQuestions(complition: @escaping ([Question]) -> Void) {
+    func getRandomQuestions(page: Int, complition: @escaping ([Question]) -> Void) {
         NetworkService.request(endpoint: QuizEndpoint.randomQuestions, completionHandler: { result in
             switch result {
             case .success(let value):
@@ -90,7 +90,7 @@ final class DataManager {
                 guard let jsonArray = jsonObj.array else { return }
                 var questionsArray = [Question]()
                 for objQuestion in jsonArray {
-                    guard let question = Question(json: objQuestion) else { continue }
+                    guard let question = Question(json: objQuestion, page: page) else { continue }
                     questionsArray.append(question)
                 }
                 DispatchQueue.main.async {
@@ -121,7 +121,7 @@ final class DataManager {
                 
                 var categoriesArray = [Category]()
                 for objCategory in jsonArray {
-                    guard let category = Category(json: objCategory) else { continue }
+                    guard let category = Category(json: objCategory, page: page) else { continue }
                     categoriesArray.append(category)
                 }
                 

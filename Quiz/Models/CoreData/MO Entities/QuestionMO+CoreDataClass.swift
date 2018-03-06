@@ -22,6 +22,7 @@ public class QuestionMO: NSManagedObject {
         
         return Question(categoryID: Int(categoryID),
                         questionID: Int(self.id),
+                        page: Int(self.page),
                         question: self.text!,
                         options: options,
                         answer: Int(self.correctAnswerIndex))
@@ -30,6 +31,7 @@ public class QuestionMO: NSManagedObject {
     func setup(from question: Question) {
         self.id = Int32(question.questionID)
         self.category?.id = Int32(question.categoryID)
+        self.page = Int32(question.page)
         self.text = question.question
         self.correctAnswerIndex = Int32(question.answer)
     }

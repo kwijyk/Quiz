@@ -14,11 +14,12 @@ import CoreData
 public class CategoryMO: NSManagedObject {
 
     func convertedPlainObject() -> Category {
-        return Category(id: Int(self.id), name: self.name ?? "")
+        return Category(id: Int(self.id), page: Int(self.page), name: self.name ?? "")
     }
     
     func setup(from category: Category) {
         self.id = Int32(category.id)
         self.name = category.name
+        self.page = Int32(category.page)
     }
 }
