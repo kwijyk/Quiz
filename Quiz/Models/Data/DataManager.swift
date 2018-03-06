@@ -25,14 +25,12 @@ final class DataManager {
                 }
             }
         } else {
-            
 //            requstCategoryFromNetwork(page: 1, complition: { categories in
 //                DispatchQueue.main.async {
 //                    complition(categories)
 //                }
 //            })
-        
-            
+
             NetworkService.request(endpoint: QuizEndpoint.categories(page: page), completionHandler: { result in
                 switch result {
                 case .success(let value):
