@@ -15,62 +15,33 @@ final class CoreDataManager {
 
     // MARK: - Private
     private lazy var persistentContainer: NSPersistentContainer = {
-
         let container = NSPersistentContainer(name: "Quiz")
         
         let fileManager = FileManager.default
-        let documentsURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-        print(documentsURL)
-        
-//        if let fileContents = try? FileManager.default.contentsOfDirectory(atPath: documentsURL.path), fileContents.isEmpty {
+        let applicationSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        let sqliteUrl = applicationSupportURL.appendingPathComponent("Quiz.sqlite")
+        if !FileManager.default.fileExists(atPath: sqliteUrl.path) {
+            let sourceSqliteURLs = [Bundle.main.url(forResource: "Quiz", withExtension: "sqlite")!,
+                                    Bundle.main.url(forResource: "Quiz", withExtension: "sqlite-wal")!,
+                                    Bundle.main.url(forResource: "Quiz", withExtension: "sqlite-shm")!]
             
-                    if !FileManager.default.fileExists(atPath: documentsURL.path) {
-            let sourceSqliteURLs = [Bundle.main.url(forResource: "Quiz", withExtension: "sqlite")!, Bundle.main.url(forResource: "Quiz", withExtension: "sqlite-wal")!, Bundle.main.url(forResource: "Quiz", withExtension: "sqlite-shm")!]
-            
-            let destSqliteURLs = [documentsURL.appendingPathComponent("Quiz.sqlite"),
-                                  documentsURL.appendingPathComponent("Quiz.sqlite-wal"),
-                                  documentsURL.appendingPathComponent("Quiz.sqlite-shm")]
-            var error:NSError? = nil
+            let destSqliteURLs = [applicationSupportURL.appendingPathComponent("Quiz.sqlite"),
+                                  applicationSupportURL.appendingPathComponent("Quiz.sqlite-wal"),
+                                  applicationSupportURL.appendingPathComponent("Quiz.sqlite-shm")]
             
             for (index, _) in sourceSqliteURLs.enumerated() {
                 do {
                     try FileManager.default.copyItem(at: sourceSqliteURLs[index], to: destSqliteURLs[index])
                 } catch {
-                    print("Error")
+                    print("Error copy dataBase")
                 }
             }
         }
-        
-        let storeURL = try! FileManager
-            .default
-            .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            .appendingPathComponent("Quiz.sqlite")
-        
-        let storeDescription = NSPersistentStoreDescription(url: storeURL)
-        container.persistentStoreDescriptions = [storeDescription]
-        
-        container.persistentStoreCoordinator.addPersistentStore(with: storeDescription, completionHandler: { (storeDescription, error) in
-            fatalError("Unresolved error \(error)")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
         })
-        
-//                container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-//                    if let error = error as NSError? {
-//                        // Replace this implementation with code to handle the error appropriately.
-//                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//
-//                        /*
-//                         Typical reasons for an error here include:
-//                         * The parent directory does not exist, cannot be created, or disallows writing.
-//                         * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-//                         * The device is out of space.
-//                         * The store could not be migrated to the current model version.
-//                         Check the error message to determine what the actual problem was.
-//                         */
-//                        fatalError("Unresolved error \(error), \(error.userInfo)")
-//                    }
-//                })
-        
-       
         return container
     }()
     
@@ -82,8 +53,6 @@ final class CoreDataManager {
             do {
                 try context.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
