@@ -42,37 +42,37 @@ final class DataManager {
     func getQuestions(by category: Category, page: Int) {
         
 //        if CoreDataManager.instance.isQuestionsExist(for: category) {
-//            CoreDataManager.instance.fetchQuestions(for: category, complitionHandler: { [unowned self] questions in
-//                self.allQuestions = questions
-//                self.postMainQueueNotification(withName: .QestionsLoaded)
-//            })
-//        } else {
-            var questionsArray = [Question]()
-            NetworkService.request(endpoint: QuizEndpoint.questions(category: category, page: page), completionHandler: { [unowned self] result in
-                switch result {
-                case .success(let value):
-                    let jsonObj = JSON(value)
-                    guard let jsonArray = jsonObj.array else { return }
-                    for objQuestion in jsonArray {
-                        guard let question = Question(json: objQuestion, page: page) else { continue }
-                        questionsArray.append(question)
-                    }
-                    self.allQuestions = questionsArray
-                    
-                    if !questionsArray.isEmpty {
-//                        CoreDataManager.instance.saveQuestions(questionsArray, for: category)
-                    } else {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            HUD.flash(.error, delay: 1.0)
-                        }
-                    }
-//
-                    self.postMainQueueNotification(withName: .QestionsLoaded)
-                case.failure(let error):
-                    print(error)
-                    self.postMainQueueNotification(withName: .DidFailLoadQestions)
-                }
+            CoreDataManager.instance.fetchQuestions(for: category, complitionHandler: { [unowned self] questions in
+                self.allQuestions = questions
+                self.postMainQueueNotification(withName: .QestionsLoaded)
             })
+//        } else {
+//            var questionsArray = [Question]()
+//            NetworkService.request(endpoint: QuizEndpoint.questions(category: category, page: page), completionHandler: { [unowned self] result in
+//                switch result {
+//                case .success(let value):
+//                    let jsonObj = JSON(value)
+//                    guard let jsonArray = jsonObj.array else { return }
+//                    for objQuestion in jsonArray {
+//                        guard let question = Question(json: objQuestion, page: page) else { continue }
+//                        questionsArray.append(question)
+//                    }
+//                    self.allQuestions = questionsArray
+//
+//                    if !questionsArray.isEmpty {
+//                        CoreDataManager.instance.saveQuestions(questionsArray, for: category)
+//                    } else {
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//                            HUD.flash(.error, delay: 1.0)
+//                        }
+//                    }
+////
+//                    self.postMainQueueNotification(withName: .QestionsLoaded)
+//                case.failure(let error):
+//                    print(error)
+//                    self.postMainQueueNotification(withName: .DidFailLoadQestions)
+//                }
+//            })
 //        }
     }
     
