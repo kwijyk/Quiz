@@ -33,9 +33,6 @@
 		88452E232008A8DC000AE4B2 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E222008A8DC000AE4B2 /* Alertable.swift */; };
 		88452E272008A8E0000AE4B2 /* Notification+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E252008A8E0000AE4B2 /* Notification+Extansion.swift */; };
 		88452E282008A8E0000AE4B2 /* PKHUD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E262008A8E0000AE4B2 /* PKHUD+Extension.swift */; };
-		88581F12204D37E300881F82 /* Quiz.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 88581F0F204D37E100881F82 /* Quiz.sqlite */; };
-		88581F13204D37E300881F82 /* Quiz.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 88581F10204D37E200881F82 /* Quiz.sqlite-shm */; };
-		88581F14204D37E300881F82 /* Quiz.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 88581F11204D37E200881F82 /* Quiz.sqlite-wal */; };
 		88C0D3772046B89D0029D6ED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C0D3762046B89D0029D6ED /* Constants.swift */; };
 		88C14D13201B565D00E42882 /* Quiz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D11201B565D00E42882 /* Quiz.xcdatamodeld */; };
 		88C14D15201B567100E42882 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D14201B567100E42882 /* CoreDataManager.swift */; };
@@ -77,9 +74,6 @@
 		88452E222008A8DC000AE4B2 /* Alertable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		88452E252008A8E0000AE4B2 /* Notification+Extansion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification+Extansion.swift"; sourceTree = "<group>"; };
 		88452E262008A8E0000AE4B2 /* PKHUD+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PKHUD+Extension.swift"; sourceTree = "<group>"; };
-		88581F0F204D37E100881F82 /* Quiz.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Quiz.sqlite; sourceTree = "<group>"; };
-		88581F10204D37E200881F82 /* Quiz.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quiz.sqlite-shm"; sourceTree = "<group>"; };
-		88581F11204D37E200881F82 /* Quiz.sqlite-wal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Quiz.sqlite-wal"; sourceTree = "<group>"; };
 		88C0D3762046B89D0029D6ED /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		88C14D12201B565D00E42882 /* Quiz.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Quiz.xcdatamodel; sourceTree = "<group>"; };
 		88C14D14201B567100E42882 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -157,9 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				88452DE42008A72F000AE4B2 /* AppDelegate.swift */,
-				88581F0F204D37E100881F82 /* Quiz.sqlite */,
-				88581F10204D37E200881F82 /* Quiz.sqlite-shm */,
-				88581F11204D37E200881F82 /* Quiz.sqlite-wal */,
 				88452DEB2008A72F000AE4B2 /* Assets.xcassets */,
 				88452DED2008A72F000AE4B2 /* LaunchScreen.storyboard */,
 				88452DF02008A72F000AE4B2 /* Info.plist */,
@@ -378,11 +369,8 @@
 				88452E0A2008A8C7000AE4B2 /* CategoryCell.xib in Resources */,
 				88452DEF2008A72F000AE4B2 /* LaunchScreen.storyboard in Resources */,
 				88452DEC2008A72F000AE4B2 /* Assets.xcassets in Resources */,
-				88581F14204D37E300881F82 /* Quiz.sqlite-wal in Resources */,
 				88452DFF2008A8B1000AE4B2 /* CategoriesViewController.xib in Resources */,
-				88581F13204D37E300881F82 /* Quiz.sqlite-shm in Resources */,
 				88452E022008A8B1000AE4B2 /* QuestionViewController.xib in Resources */,
-				88581F12204D37E300881F82 /* Quiz.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import CoreData
+import PKHUD
 
 final class DataManager {
 
@@ -18,50 +19,36 @@ final class DataManager {
     private(set) var allQuestions: [Question]?
     
     func getCategory(page: Int, complition: @escaping ([Category]) -> Void) {
-//        if CoreDataManager.instance.isCategoriesExist {
-//            CoreDataManager.instance.fetchCategories { fetchedCatecories in
-//                DispatchQueue.main.async {
-//                    complition(fetchedCatecories)
-//                }
-//            }
-//        } else {
-//            requstCategoryFromNetwork(page: 1, complition: { categories in
-//                DispatchQueue.main.async {
-//                    complition(categories)
-//                }
-//            })
-
-            NetworkService.request(endpoint: QuizEndpoint.categories(page: page), completionHandler: { result in
-                switch result {
-                case .success(let value):
-                    let jsonObj = JSON(value)
-                    guard let jsonArray = jsonObj.array else { return }
-                    var categoriesArray = [Category]()
-                    for objCategory in jsonArray {
-                        guard let category = Category(json: objCategory, page: page) else { continue }
-                        categoriesArray.append(category)
-                    }
-                    CoreDataManager.instance.saveCategories(categoriesArray)
-                    DispatchQueue.main.async {
-                        complition(categoriesArray)
-                    }
-                case.failure(let error):
-                    print(error)
+        NetworkService.request(endpoint: QuizEndpoint.categories(page: page), completionHandler: { result in
+            switch result {
+            case .success(let value):
+                let jsonObj = JSON(value)
+                guard let jsonArray = jsonObj.array else { return }
+                var categoriesArray = [Category]()
+                for objCategory in jsonArray {
+                    guard let category = Category(json: objCategory, page: page) else { continue }
+                    categoriesArray.append(category)
                 }
-            })
-//        }
+                CoreDataManager.instance.saveCategories(categoriesArray)
+                DispatchQueue.main.async {
+                    complition(categoriesArray)
+                }
+            case.failure(let error):
+                print(error)
+            }
+        })
     }
     
     func getQuestions(by category: Category, page: Int) {
         
-        if CoreDataManager.instance.isQuestionsExist(for: category) {
-            CoreDataManager.instance.fetchQuestions(for: category, complitionHandler: { [unowned self] questions in
-                self.allQuestions = questions
-                self.postMainQueueNotification(withName: .QestionsLoaded)
-            })
-        } else {
+//        if CoreDataManager.instance.isQuestionsExist(for: category) {
+//            CoreDataManager.instance.fetchQuestions(for: category, complitionHandler: { [unowned self] questions in
+//                self.allQuestions = questions
+//                self.postMainQueueNotification(withName: .QestionsLoaded)
+//            })
+//        } else {
             var questionsArray = [Question]()
-            NetworkService.request(endpoint: QuizEndpoint.questions(category: category), completionHandler: { [unowned self] result in
+            NetworkService.request(endpoint: QuizEndpoint.questions(category: category, page: page), completionHandler: { [unowned self] result in
                 switch result {
                 case .success(let value):
                     let jsonObj = JSON(value)
@@ -71,36 +58,43 @@ final class DataManager {
                         questionsArray.append(question)
                     }
                     self.allQuestions = questionsArray
-
-                    CoreDataManager.instance.saveQuestions(questionsArray, for: category)
+                    
+                    if !questionsArray.isEmpty {
+//                        CoreDataManager.instance.saveQuestions(questionsArray, for: category)
+                    } else {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            HUD.flash(.error, delay: 1.0)
+                        }
+                    }
+//
                     self.postMainQueueNotification(withName: .QestionsLoaded)
                 case.failure(let error):
                     print(error)
                     self.postMainQueueNotification(withName: .DidFailLoadQestions)
                 }
             })
-        }
+//        }
     }
     
-    func getRandomQuestions(page: Int, complition: @escaping ([Question]) -> Void) {
-        NetworkService.request(endpoint: QuizEndpoint.randomQuestions, completionHandler: { result in
-            switch result {
-            case .success(let value):
-                let jsonObj = JSON(value)
-                guard let jsonArray = jsonObj.array else { return }
-                var questionsArray = [Question]()
-                for objQuestion in jsonArray {
-                    guard let question = Question(json: objQuestion, page: page) else { continue }
-                    questionsArray.append(question)
-                }
-                DispatchQueue.main.async {
-                    complition(questionsArray)
-                }
-            case.failure(let error):
-                print(error)
-            }
-        })
-    }
+//    func getRandomQuestions(page: Int, complition: @escaping ([Question]) -> Void) {
+//        NetworkService.request(endpoint: QuizEndpoint.randomQuestions, completionHandler: { result in
+//            switch result {
+//            case .success(let value):
+//                let jsonObj = JSON(value)
+//                guard let jsonArray = jsonObj.array else { return }
+//                var questionsArray = [Question]()
+//                for objQuestion in jsonArray {
+//                    guard let question = Question(json: objQuestion, page: page) else { continue }
+//                    questionsArray.append(question)
+//                }
+//                DispatchQueue.main.async {
+//                    complition(questionsArray)
+//                }
+//            case.failure(let error):
+//                print(error)
+//            }
+//        })
+//    }
     
     func clearLocalStorage() {
         CoreDataManager.instance.deleteAllData()

@@ -48,19 +48,20 @@ class QuestionViewController: UIViewController, Alertable {
         ibTableView.register(CategoryCell.nib, forCellReuseIdentifier: CategoryCell.reuseIdentifier)
     }
     
+    static var pageQuestions = 1
     private func getQuestionsData() {
-        
         if let unwCategoty = category {
-            if !CoreDataManager.instance.isQuestionsExist(for: unwCategoty) {
-                HUD.showProgress()
-            }
-            DataManager.instance.getQuestions(by: unwCategoty, page: 1)
-        } else {
-            HUD.showProgress()
-            DataManager.instance.getRandomQuestions(page: 1, complition: { [unowned self] qustions in
-                HUD.hide()
-                self.questionsArray = qustions
-            })
+//            if !CoreDataManager.instance.isQuestionsExist(for: unwCategoty) {
+//                HUD.showProgress()
+//            }
+            DataManager.instance.getQuestions(by: unwCategoty, page: QuestionViewController.pageQuestions)
+            QuestionViewController.pageQuestions += 1
+//        } else {
+//            HUD.showProgress()
+//            DataManager.instance.getRandomQuestions(page: 1, complition: { [unowned self] qustions in
+//                HUD.hide()
+//                self.questionsArray = qustions
+//            })
     
         }
     }

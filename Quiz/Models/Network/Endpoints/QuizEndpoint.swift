@@ -11,7 +11,7 @@ import Alamofire
 
 enum QuizEndpoint: Endpoint {
     case categories(page: Int)
-    case questions(category: Category)
+    case questions(category: Category, page: Int)
     case randomQuestions
 }
 
@@ -22,11 +22,10 @@ extension QuizEndpoint {
     }
     
     var path: String {
-        
         switch self {
         case .categories:
             return "categories"
-        case .questions(let category):
+        case .questions(let category, _):
             return "categories/\(category.id)/questions"
         case .randomQuestions:
             return "questions"
@@ -37,10 +36,10 @@ extension QuizEndpoint {
         switch self {
         case .categories(let page):
             return ["page": page, "limit": Constants.numberOfItemInPage]
+        case .questions(_, let page):
+             return ["page": page, "limit": Constants.numberOfItemInPage]
         case .randomQuestions:
             return ["page": 3, "limit": 4]
-        default:
-            return nil
         }
     }
 }
