@@ -19,22 +19,15 @@ final class CoreDataManager {
         
         let fileManager = FileManager.default
         let applicationSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-        let sqliteUrl = applicationSupportURL.appendingPathComponent("Quiz.sqlite")
-        if !FileManager.default.fileExists(atPath: sqliteUrl.path) {
-            let sourceSqliteURLs = [Bundle.main.url(forResource: "Quiz", withExtension: "sqlite")!,
-                                    Bundle.main.url(forResource: "Quiz", withExtension: "sqlite-wal")!,
-                                    Bundle.main.url(forResource: "Quiz", withExtension: "sqlite-shm")!]
+        let destSqliteURL = applicationSupportURL.appendingPathComponent("Quiz.sqlite")
+    
+        if let sourceSqliteURL = Bundle.main.url(forResource: "Quiz", withExtension: "sqlite"),
+            !FileManager.default.fileExists(atPath: destSqliteURL.path) {
             
-            let destSqliteURLs = [applicationSupportURL.appendingPathComponent("Quiz.sqlite"),
-                                  applicationSupportURL.appendingPathComponent("Quiz.sqlite-wal"),
-                                  applicationSupportURL.appendingPathComponent("Quiz.sqlite-shm")]
-            
-            for (index, _) in sourceSqliteURLs.enumerated() {
-                do {
-                    try FileManager.default.copyItem(at: sourceSqliteURLs[index], to: destSqliteURLs[index])
-                } catch {
-                    print("Error copy dataBase")
-                }
+            do {
+                try FileManager.default.copyItem(at: sourceSqliteURL, to: destSqliteURL)
+            } catch {
+                print("Error with copy Database file")
             }
         }
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
