@@ -41,8 +41,7 @@ class CategoriesViewController: UIViewController, Alertable {
         ibTableView.dataSource = self
         ibTableView.separatorStyle = .none
         ibTableView.keyboardDismissMode = .onDrag
-        
-        ibTableView.register(CategoryCell.nib, forCellReuseIdentifier: CategoryCell.reuseIdentifier)
+        ibTableView.register(QuestionTableViewCell.self)
     }
     
     private func getCategoriesData() {
@@ -69,8 +68,7 @@ extension CategoriesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryCell.reuseIdentifier) as? CategoryCell else { return UITableViewCell ()}
-        
+        let cell: QuestionTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         let category = categoriesArray[indexPath.row]
         cell.updateCategoryCell(category: category)
         
@@ -79,9 +77,8 @@ extension CategoriesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        
-        guard let category = getCategory(indexPath: indexPath) else { return }
-        let questionVC = QuestionViewController(category: category, nameCategory: category.name)
+    
+        let questionVC = QuestionViewController()
         navigationController?.pushViewController(questionVC, animated: true)
     }
 }

@@ -8,19 +8,20 @@
 
 import UIKit
 
-class CategoryCell: UITableViewCell {
-
-    static let reuseIdentifier = String(describing: CategoryCell.self)
-    static let nib = UINib(nibName: String(describing: CategoryCell.self), bundle: nil)
+class QuestionTableViewCell: UITableViewCell, NibLoadableView, ReusableView {
     
     @IBOutlet private weak var ibLabel: UILabel!
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
     }
 
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        contentView.backgroundColor = selected ? .darkGray : .black
+    }
+    
     func updateCategoryCell(category: Category) {
         ibLabel.textAlignment = .center
         ibLabel.text = category.name

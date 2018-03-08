@@ -18,12 +18,10 @@ class AnswerViewController: UIViewController, Alertable {
     @IBOutlet private weak var ibAnswersContentView: UIStackView!
     @IBOutlet private weak var ibQuestionLabel: UILabel!
 
-    private let nameCategory: String
     private let question: Question
     var answerComplition: ((Bool) -> Void)?
     
-    init(nameCategory: String, question: Question) {
-        self.nameCategory = nameCategory
+    init(question: Question) {
         self.question = question
         super.init(nibName: nil, bundle: nil)
     }
@@ -34,7 +32,6 @@ class AnswerViewController: UIViewController, Alertable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = nameCategory
         ibQuestionLabel.text = question.question
         setupUI()
     }

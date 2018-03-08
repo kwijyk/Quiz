@@ -10,6 +10,9 @@
 		405BFB8ABDE7B2EDC4743121 /* Pods_Quiz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0547AE25FE9ABFC21D74555C /* Pods_Quiz.framework */; };
 		4904DDDF204345ED0004F798 /* OptionMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4904DDDD204345ED0004F798 /* OptionMO+CoreDataClass.swift */; };
 		4904DDE0204345ED0004F798 /* OptionMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4904DDDE204345ED0004F798 /* OptionMO+CoreDataProperties.swift */; };
+		8824F66C20517FE200AD79BA /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824F66A20517FE200AD79BA /* ReusableView.swift */; };
+		8824F66D20517FE200AD79BA /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824F66B20517FE200AD79BA /* NibLoadableView.swift */; };
+		8824F66F2051820200AD79BA /* UITableView+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8824F66E2051820200AD79BA /* UITableView+Extansion.swift */; };
 		88452DE52008A72F000AE4B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452DE42008A72F000AE4B2 /* AppDelegate.swift */; };
 		88452DEC2008A72F000AE4B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88452DEB2008A72F000AE4B2 /* Assets.xcassets */; };
 		88452DEF2008A72F000AE4B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88452DED2008A72F000AE4B2 /* LaunchScreen.storyboard */; };
@@ -20,8 +23,8 @@
 		88452E022008A8B1000AE4B2 /* QuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88452DFC2008A8B1000AE4B2 /* QuestionViewController.xib */; };
 		88452E032008A8B1000AE4B2 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452DFD2008A8B1000AE4B2 /* CategoriesViewController.swift */; };
 		88452E082008A8C7000AE4B2 /* NavigationBarConfig .swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E052008A8C7000AE4B2 /* NavigationBarConfig .swift */; };
-		88452E092008A8C7000AE4B2 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E062008A8C7000AE4B2 /* CategoryCell.swift */; };
-		88452E0A2008A8C7000AE4B2 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88452E072008A8C7000AE4B2 /* CategoryCell.xib */; };
+		88452E092008A8C7000AE4B2 /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E062008A8C7000AE4B2 /* QuestionTableViewCell.swift */; };
+		88452E0A2008A8C7000AE4B2 /* QuestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88452E072008A8C7000AE4B2 /* QuestionTableViewCell.xib */; };
 		88452E152008A8D0000AE4B2 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E0C2008A8CF000AE4B2 /* DataManager.swift */; };
 		88452E162008A8D0000AE4B2 /* QuizEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E0F2008A8CF000AE4B2 /* QuizEndpoint.swift */; };
 		88452E172008A8D0000AE4B2 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E102008A8CF000AE4B2 /* Endpoint.swift */; };
@@ -50,6 +53,9 @@
 		43BBAF677F7AB9E393B52257 /* Pods-Quiz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quiz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Quiz/Pods-Quiz.release.xcconfig"; sourceTree = "<group>"; };
 		4904DDDD204345ED0004F798 /* OptionMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4904DDDE204345ED0004F798 /* OptionMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8824F66A20517FE200AD79BA /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		8824F66B20517FE200AD79BA /* NibLoadableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadableView.swift; sourceTree = "<group>"; };
+		8824F66E2051820200AD79BA /* UITableView+Extansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extansion.swift"; sourceTree = "<group>"; };
 		88452DE12008A72F000AE4B2 /* Quiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88452DE42008A72F000AE4B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88452DEB2008A72F000AE4B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -62,8 +68,8 @@
 		88452DFC2008A8B1000AE4B2 /* QuestionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionViewController.xib; sourceTree = "<group>"; };
 		88452DFD2008A8B1000AE4B2 /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		88452E052008A8C7000AE4B2 /* NavigationBarConfig .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NavigationBarConfig .swift"; sourceTree = "<group>"; };
-		88452E062008A8C7000AE4B2 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
-		88452E072008A8C7000AE4B2 /* CategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryCell.xib; sourceTree = "<group>"; };
+		88452E062008A8C7000AE4B2 /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
+		88452E072008A8C7000AE4B2 /* QuestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTableViewCell.xib; sourceTree = "<group>"; };
 		88452E0C2008A8CF000AE4B2 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		88452E0F2008A8CF000AE4B2 /* QuizEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizEndpoint.swift; sourceTree = "<group>"; };
 		88452E102008A8CF000AE4B2 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -176,8 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				88452E052008A8C7000AE4B2 /* NavigationBarConfig .swift */,
-				88452E062008A8C7000AE4B2 /* CategoryCell.swift */,
-				88452E072008A8C7000AE4B2 /* CategoryCell.xib */,
+				88452E062008A8C7000AE4B2 /* QuestionTableViewCell.swift */,
+				88452E072008A8C7000AE4B2 /* QuestionTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -223,6 +229,8 @@
 			isa = PBXGroup;
 			children = (
 				88452E222008A8DC000AE4B2 /* Alertable.swift */,
+				8824F66B20517FE200AD79BA /* NibLoadableView.swift */,
+				8824F66A20517FE200AD79BA /* ReusableView.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -232,6 +240,7 @@
 			children = (
 				88452E252008A8E0000AE4B2 /* Notification+Extansion.swift */,
 				88452E262008A8E0000AE4B2 /* PKHUD+Extension.swift */,
+				8824F66E2051820200AD79BA /* UITableView+Extansion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -369,7 +378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88452E002008A8B1000AE4B2 /* AnswerViewController.xib in Resources */,
-				88452E0A2008A8C7000AE4B2 /* CategoryCell.xib in Resources */,
+				88452E0A2008A8C7000AE4B2 /* QuestionTableViewCell.xib in Resources */,
 				88452DEF2008A72F000AE4B2 /* LaunchScreen.storyboard in Resources */,
 				88901942204EFBD2008D5EDA /* Quiz.sqlite in Resources */,
 				88452DEC2008A72F000AE4B2 /* Assets.xcassets in Resources */,
@@ -449,13 +458,16 @@
 				88452E182008A8D0000AE4B2 /* NetworkService.swift in Sources */,
 				88C14D1F201B5D4A00E42882 /* CategoryMO+CoreDataProperties.swift in Sources */,
 				88452E082008A8C7000AE4B2 /* NavigationBarConfig .swift in Sources */,
+				8824F66D20517FE200AD79BA /* NibLoadableView.swift in Sources */,
 				88C14D13201B565D00E42882 /* Quiz.xcdatamodeld in Sources */,
 				88452E172008A8D0000AE4B2 /* Endpoint.swift in Sources */,
+				8824F66C20517FE200AD79BA /* ReusableView.swift in Sources */,
 				88452E012008A8B1000AE4B2 /* AnswerViewController.swift in Sources */,
 				88C14D1D201B5D4A00E42882 /* QuestionMO+CoreDataProperties.swift in Sources */,
 				88452E202008A8D6000AE4B2 /* Utils.swift in Sources */,
 				88C0D3772046B89D0029D6ED /* Constants.swift in Sources */,
 				88D1840120446FA4001A0A8D /* GlobalApperance.swift in Sources */,
+				8824F66F2051820200AD79BA /* UITableView+Extansion.swift in Sources */,
 				88452E232008A8DC000AE4B2 /* Alertable.swift in Sources */,
 				88452E272008A8E0000AE4B2 /* Notification+Extansion.swift in Sources */,
 				88452DFE2008A8B1000AE4B2 /* QuestionViewController.swift in Sources */,
@@ -466,7 +478,7 @@
 				88452DE52008A72F000AE4B2 /* AppDelegate.swift in Sources */,
 				88452E1B2008A8D0000AE4B2 /* Category.swift in Sources */,
 				88452E1A2008A8D0000AE4B2 /* Question.swift in Sources */,
-				88452E092008A8C7000AE4B2 /* CategoryCell.swift in Sources */,
+				88452E092008A8C7000AE4B2 /* QuestionTableViewCell.swift in Sources */,
 				88C14D1C201B5D4A00E42882 /* QuestionMO+CoreDataClass.swift in Sources */,
 				88C14D15201B567100E42882 /* CoreDataManager.swift in Sources */,
 				4904DDE0204345ED0004F798 /* OptionMO+CoreDataProperties.swift in Sources */,
