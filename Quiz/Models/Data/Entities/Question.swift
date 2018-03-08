@@ -43,4 +43,14 @@ extension Question {
     }
 }
 
+extension Question: Hashable {
+    var hashValue: Int {
+        return questionID.hashValue + question.hashValue
+    }
+    
+    static func ==(lhs: Question, rhs: Question) -> Bool {
+        return lhs.questionID == rhs.questionID && lhs.question == rhs.question
+    }
+}
+
 

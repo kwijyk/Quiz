@@ -98,8 +98,35 @@ extension CoreDataManager {
                 complitionHandler([])
                 return
         }
-        let rusult = questions.map { $0.convertedPlainObject() }
-        complitionHandler(rusult)
+        let result = questions.map { $0.convertedPlainObject() }
+        complitionHandler(result)
+    }
+    
+    func fetchRandomQuestions(quantity: Int, complitionHandler: @escaping ([Question]) -> Void) {
+        persistentContainer.performBackgroundTask { [unowned self] bgContext in
+            let request: NSFetchRequest<QuestionMO> = QuestionMO.fetchRequest()
+            let questionCount: Int
+            do {
+                questionCount = try self.persistentContainer.viewContext.count(for: request)
+            } catch {
+                DispatchQueue.main.async {
+                    complitionHandler([])
+                }
+                return
+            }
+            var randomQuestionArray = [QuestionMO]()
+            for _ in 1...quantity {
+                request.fetchLimit = 1
+                request.fetchOffset = Int(arc4random_uniform(UInt32(questionCount)))
+                let fetchedResult = (try? bgContext.fetch(request)) ?? []
+                guard let questionMO = fetchedResult.first else { continue }
+                randomQuestionArray.append(questionMO)
+            }
+            let result = randomQuestionArray.map { $0.convertedPlainObject() }
+            DispatchQueue.main.async {
+                complitionHandler(result)
+            }
+        }
     }
     
     func saveQuestions(_ questions: [Question], for category: Category) {

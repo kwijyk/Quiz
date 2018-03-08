@@ -35,7 +35,7 @@ class QuestionViewController: UIViewController, Alertable {
         title = nameCategory
         addNotifications()
         setupTableView()
-        getQuestionsData()
+        getQuestionsData(quantity: 4)
     }
     
     // MARK: - Private methods
@@ -48,22 +48,11 @@ class QuestionViewController: UIViewController, Alertable {
         ibTableView.register(CategoryCell.nib, forCellReuseIdentifier: CategoryCell.reuseIdentifier)
     }
     
-    static var pageQuestions = 1
-    private func getQuestionsData() {
-        if let unwCategoty = category {
-//            if !CoreDataManager.instance.isQuestionsExist(for: unwCategoty) {
-//                HUD.showProgress()
-//            }
-            DataManager.instance.getQuestions(by: unwCategoty, page: QuestionViewController.pageQuestions)
-            QuestionViewController.pageQuestions += 1
-//        } else {
-//            HUD.showProgress()
-//            DataManager.instance.getRandomQuestions(page: 1, complition: { [unowned self] qustions in
-//                HUD.hide()
-//                self.questionsArray = qustions
-//            })
-    
-        }
+    private func getQuestionsData(quantity: Int) {
+        CoreDataManager.instance.fetchRandomQuestions(quantity: quantity, complitionHandler: { [unowned self] questions in
+            self.questionsArray = questions
+            self.ibTableView.reloadData()
+        })
     }
         
     private func addNotifications() {
@@ -90,10 +79,27 @@ extension QuestionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-
+        let cell = tableView.cellForRow(at: indexPath)
+        tableView.visibleCells.forEach { cell in
+            cell.contentView.backgroundColor = .black
+        }
+        cell?.contentView.backgroundColor = .darkGray
         let question = questionsArray[indexPath.row]
         let answerVC = AnswerViewController(nameCategory: nameCategory, question: question)
         navigationController?.pushViewController(answerVC, animated: true)
+        
+        answerVC.answerComplition = { [unowned self] trueAnswer in
+            if trueAnswer {
+                CoreDataManager.instance.fetchRandomQuestions(quantity: 1, complitionHandler: { [weak self] questions in
+                    guard let unwQuestion = questions.first else { return }
+                    self?.questionsArray[indexPath.row] = unwQuestion
+                    tableView.reloadData()
+                })
+            } else {
+                self.questionsArray.remove(at: indexPath.row)
+                tableView.reloadData()
+            }
+        }
     }
 }
 

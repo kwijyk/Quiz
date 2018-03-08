@@ -20,6 +20,7 @@ class AnswerViewController: UIViewController, Alertable {
 
     private let nameCategory: String
     private let question: Question
+    var answerComplition: ((Bool) -> Void)?
     
     init(nameCategory: String, question: Question) {
         self.nameCategory = nameCategory
@@ -78,19 +79,20 @@ class AnswerViewController: UIViewController, Alertable {
         stackView.heightAnchor.constraint(equalToConstant: 54).isActive = true
         return stackView
     }
-        
-        @objc private func answerPressed(_ sender: UIButton) {
+    
+    @objc private func answerPressed(_ sender: UIButton) {
         if isCorrectAnswerPressed(sender) {
-            HUD.flash(.success, delay: 1.0)
-//            showMessage(title: "Congratulation", message: "This is right answer", handler: { [weak self] in
-//                self?.dismiss(animated: false, completion: nil)
-//            })
+            HUD.flash(.success, delay: 1.0, completion: { [weak self] success in
+                self?.navigationController?.popViewController(animated: true)
+            })
         } else {
-            HUD.flash(.error, delay: 1.0)
-//            showMessage(title: "Fail", message: "Try again")
+            HUD.flash(.error, delay: 1.0, completion: { [weak self] success in
+                self?.navigationController?.popViewController(animated: true)
+            })
         }
+        answerComplition?(isCorrectAnswerPressed(sender))
     }
-
+    
     private func isCorrectAnswerPressed(_ sender: UIButton) -> Bool {
         let answerIndex = sender.tag
         return question.answer == answerIndex
