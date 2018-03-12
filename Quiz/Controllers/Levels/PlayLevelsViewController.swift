@@ -37,6 +37,39 @@ class PlayLevelsViewController: UIViewController {
             }
         }
         
+        var scoreCoefficient: Int {
+            switch self {
+            case .firstLevel:
+                return 1
+            case .secondLevel:
+                return 2
+            case .thirdLevel:
+                return 3
+            }
+        }
+        
+        var livesQuantity: Int {
+            switch self {
+            case .firstLevel:
+                return 4
+            case .secondLevel:
+                return 3
+            case .thirdLevel:
+                return 2
+            }
+        }
+        
+        var timerValue: Int {
+            switch self {
+            case .firstLevel:
+                return 3
+            case .secondLevel:
+                return 2
+            case .thirdLevel:
+                return 1
+            }
+        }
+        
         static let levelTypes: [LevelType] = [.firstLevel, .secondLevel, .thirdLevel]
     }
     
@@ -72,11 +105,19 @@ class PlayLevelsViewController: UIViewController {
             button.setTitle(title, for: .normal)
         })
     }
+    
+    private func getLevel(by button: UIButton) -> LevelType {
+        guard let buttonIndex = ibLevelButtons.index(of: button) else {
+            fatalError("There is no such type of level")
+        }
+        return LevelType.levelTypes[buttonIndex]
+    }
 
     @IBAction private func levelDidSelected(_ sender: UIButton) {
         switch playType {
         case .forLife:
-            let questionVC = QuestionViewController()
+            let levelType = getLevel(by: sender)
+            let questionVC = QuestionViewController(scoreCoefficient: levelType.scoreCoefficient, livesQuantity: levelType.livesQuantity)
             navigationController?.pushViewController(questionVC, animated: true)
         case .forTime:
             CoreDataManager.instance.fetchRandomQuestions(quantity: 1, complitionHandler: { [weak self] questions in

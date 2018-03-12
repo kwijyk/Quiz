@@ -11,7 +11,18 @@ import PKHUD
 
 class QuestionViewController: UIViewController, Alertable {
 
+    @IBOutlet private weak var ibScoreLabel: UILabel!
+    @IBOutlet private weak var ibRecordLabel: UILabel!
+    @IBOutlet private weak var ibLivesLabel: UILabel!
     @IBOutlet private weak var ibTableView: UITableView!
+    
+    let scoreCoefficient: Int
+    var livesQuantity: Int
+//    private var score: Int {
+//        didSet {
+//          score *= scoreCoefficient
+//        }
+//    }
     
     private var questionsArray = [Question]() {
         didSet {
@@ -19,7 +30,9 @@ class QuestionViewController: UIViewController, Alertable {
         }
     }
 
-    init() {
+    init(scoreCoefficient: Int, livesQuantity: Int) {
+        self.scoreCoefficient = scoreCoefficient
+        self.livesQuantity = livesQuantity
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -29,15 +42,20 @@ class QuestionViewController: UIViewController, Alertable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupResultView()
         setupTableView()
-        getQuestionsData(quantity: 4)
+        getQuestionsData(quantity: livesQuantity)
     }
     
     // MARK: - Private methods
+    private func setupResultView() {
+        ibLivesLabel.text = String(livesQuantity)
+    }
+    
     private func setupTableView() {
         ibTableView.delegate = self
         ibTableView.dataSource = self
-        ibTableView.separatorStyle = .none
+        ibTableView.tableFooterView = UIView(frame: .zero)
         ibTableView.keyboardDismissMode = .onDrag
         ibTableView.register(QuestionTableViewCell.self)
     }
