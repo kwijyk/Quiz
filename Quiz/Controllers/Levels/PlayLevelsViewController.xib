@@ -13,6 +13,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayLevelsViewController" customModule="Quiz" customModuleProvider="target">
             <connections>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outletCollection property="ibLevelButtons" destination="3mi-Nw-BO7" collectionClass="NSMutableArray" id="eM0-9A-iKI"/>
+                <outletCollection property="ibLevelButtons" destination="4Bz-KJ-b1P" collectionClass="NSMutableArray" id="KbA-4R-S4x"/>
+                <outletCollection property="ibLevelButtons" destination="efh-Kt-4IH" collectionClass="NSMutableArray" id="sN2-MY-PTs"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -31,10 +34,10 @@
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="firstLevelDidSelected:" destination="-1" eventType="touchUpInside" id="0l0-hc-1M9"/>
+                                <action selector="levelDidSelected:" destination="-1" eventType="touchUpInside" id="v04-Vj-E4B"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efh-Kt-4IH">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Bz-KJ-b1P">
                             <rect key="frame" x="0.0" y="100" width="294" height="40"/>
                             <color key="backgroundColor" red="0.74109476804733276" green="0.74122363328933716" blue="0.74108666181564331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="23"/>
@@ -42,10 +45,10 @@
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="secondLevelDidSelected:" destination="-1" eventType="touchUpInside" id="Sxd-2l-iUe"/>
+                                <action selector="levelDidSelected:" destination="-1" eventType="touchUpInside" id="Kps-Px-r0V"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Bz-KJ-b1P">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efh-Kt-4IH">
                             <rect key="frame" x="0.0" y="200" width="294" height="40"/>
                             <color key="backgroundColor" red="0.74109476804733276" green="0.74122363328933716" blue="0.74108666181564331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="23"/>
@@ -53,7 +56,7 @@
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="thirdLevelDidSelected:" destination="-1" eventType="touchUpInside" id="wOm-ss-rkt"/>
+                                <action selector="levelDidSelected:" destination="-1" eventType="touchUpInside" id="L7g-Jc-uBS"/>
                             </connections>
                         </button>
                     </subviews>
@@ -66,6 +69,7 @@
                 <constraint firstItem="QbI-lx-ebY" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="wu8-ma-6af"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="949" y="11"/>
         </view>
     </objects>
 </document>
