@@ -15,11 +15,11 @@ class MainMenuViewController: UIViewController {
         title = "Menu"
     }
     
-    @IBAction func newGameAction(_ sender: Any) {
+    @IBAction private func newGameAction(_ sender: Any) {
         let playModeVC = PlayModeViewController()
         navigationController?.pushViewController(playModeVC, animated: true)
     }
     
-    @IBAction func leaderboardAction(_ sender: Any) {
+    @IBAction private func leaderboardAction(_ sender: Any) {
     }
 }

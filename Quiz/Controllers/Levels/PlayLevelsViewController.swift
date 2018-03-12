@@ -40,7 +40,7 @@ class PlayLevelsViewController: UIViewController {
         static let levelTypes: [LevelType] = [.firstLevel, .secondLevel, .thirdLevel]
     }
     
-    @IBOutlet var ibLevelButtons: [UIButton]!
+    @IBOutlet private var ibLevelButtons: [UIButton]!
     
     let playType: PlayModeViewController.GameModeType
     
@@ -56,22 +56,24 @@ class PlayLevelsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Level"
-        
-        switch playType {
-        case .forLife:
-            ibLevelButtons.enumerated().forEach({ index, button in
-                let title = LevelType.levelTypes[index].lifeButtonName
-                button.setTitle(title, for: .normal)
-            })
-        case .forTime:
-            ibLevelButtons.enumerated().forEach({ index, button in
-                let title = LevelType.levelTypes[index].timeButtonName
-                button.setTitle(title, for: .normal)
-            })
-        }
+        setupLevelButtons()
+    }
+    
+    // MARK: - Private methods
+    private func setupLevelButtons() {
+        ibLevelButtons.enumerated().forEach({ index, button in
+            let title: String
+            switch playType {
+            case .forLife:
+                title = LevelType.levelTypes[index].lifeButtonName
+            case .forTime:
+                title = LevelType.levelTypes[index].timeButtonName
+            }
+            button.setTitle(title, for: .normal)
+        })
     }
 
-    @IBAction func levelDidSelected(_ sender: UIButton) {
+    @IBAction private func levelDidSelected(_ sender: UIButton) {
         switch playType {
         case .forLife:
             let questionVC = QuestionViewController()

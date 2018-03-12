@@ -20,12 +20,12 @@ class PlayModeViewController: UIViewController {
         title = "Play"
     }
 
-    @IBAction func forLifePressed(_ sender: Any) {
+    @IBAction private func forLifePressed(_ sender: Any) {
         let playLevelsVC = PlayLevelsViewController(playType: .forLife)
         navigationController?.pushViewController(playLevelsVC, animated: true)
     }
     
-    @IBAction func forTimePressed(_ sender: Any) {
+    @IBAction private func forTimePressed(_ sender: Any) {
         let playLevelsVC = PlayLevelsViewController(playType: .forTime)
         navigationController?.pushViewController(playLevelsVC, animated: true)
     }
