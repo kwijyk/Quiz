@@ -17,12 +17,18 @@ class QuestionViewController: UIViewController, Alertable {
     @IBOutlet private weak var ibTableView: UITableView!
     
     let scoreCoefficient: Int
-    var livesQuantity: Int
-//    private var score: Int {
-//        didSet {
-//          score *= scoreCoefficient
-//        }
-//    }
+    
+    var livesQuantity: Int {
+        didSet {
+            ibLivesLabel.text = String(livesQuantity)
+        }
+    }
+    
+    private var score: Int = 0 {
+        didSet {
+          ibScoreLabel.text = String(score * scoreCoefficient)
+        }
+    }
     
     private var questionsArray = [Question]() {
         didSet {
@@ -84,18 +90,20 @@ extension QuestionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let question = questionsArray[indexPath.row]
-        let answerVC = AnswerViewController(question: question)
+        let answerVC = AnswerViewController(question: question, scoreCoefficient: scoreCoefficient, livesQuantity: livesQuantity)
         navigationController?.pushViewController(answerVC, animated: true)
         
-        answerVC.answerComplition = { [unowned self] trueAnswer in
-            if trueAnswer {
+        answerVC.answerComplition = { [unowned self] score in
+            if self.score < score {
                 CoreDataManager.instance.fetchRandomQuestions(quantity: 1, complitionHandler: { [weak self] questions in
                     guard let unwQuestion = questions.first else { return }
                     self?.questionsArray[indexPath.row] = unwQuestion
                     tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
                 })
+                self.score = score
             } else {
                 self.questionsArray.remove(at: indexPath.row)
+                self.livesQuantity -= 1
             }
         }
     }

@@ -40,7 +40,6 @@ final class DataManager {
     }
     
     func getQuestions(by category: Category, page: Int) {
-        
         if CoreDataManager.instance.isQuestionsExist(for: category) {
             CoreDataManager.instance.fetchQuestions(for: category, complitionHandler: { [unowned self] questions in
                 self.allQuestions = questions

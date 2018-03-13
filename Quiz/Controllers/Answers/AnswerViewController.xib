@@ -13,7 +13,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnswerViewController" customModule="Quiz" customModuleProvider="target">
             <connections>
                 <outlet property="ibAnswersContentView" destination="mly-4r-dcB" id="OWE-IP-1Rz"/>
+                <outlet property="ibExpirationCounterLabel" destination="yLD-zQ-yO4" id="no7-OW-guk"/>
+                <outlet property="ibExpirationNameLabel" destination="sTJ-Wt-HBQ" id="dVw-BZ-peG"/>
                 <outlet property="ibQuestionLabel" destination="kLG-8t-THX" id="9V7-xd-qPS"/>
+                <outlet property="ibRecordLabel" destination="2fd-fO-aGE" id="5s6-Lm-eY4"/>
+                <outlet property="ibScoreLabel" destination="Tl2-AP-9Q9" id="hg8-QC-Cuo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -140,7 +144,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="YcV-pf-K05" secondAttribute="trailing" id="q98-OB-xki"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="1" y="-55"/>
+            <point key="canvasLocation" x="27" y="-116"/>
         </view>
     </objects>
 </document>

@@ -10,20 +10,37 @@ import UIKit
 import PKHUD
 
 class AnswerViewController: UIViewController, Alertable {
-
-    enum TypeAnswerButton: Int {
-        case firstAnswer, secondAnswer, thirdAnswer, forthAnswer
-    }
     
+    static let CurrentUserScoreKey = "currentUserScore"
+    static let MaxUserScoreKey = "currentUserScore"
+    
+    @IBOutlet private weak var ibRecordLabel: UILabel!
+    @IBOutlet private weak var ibScoreLabel: UILabel!
     @IBOutlet private weak var ibAnswersContentView: UIStackView!
     @IBOutlet private weak var ibQuestionLabel: UILabel!
-
-    private let question: Question
-    var answerComplition: ((Bool) -> Void)?
+    @IBOutlet weak var ibExpirationCounterLabel: UILabel!
+    @IBOutlet weak var ibExpirationNameLabel: UILabel!
     
-    init(question: Question) {
+    let scoreCoefficient: Int
+    let livesQuantity: Int?
+
+    private var score: Int {
+        get { return UserDefaults.standard.integer(forKey: AnswerViewController.CurrentUserScoreKey) }
+        set { UserDefaults.standard.set(newValue, forKey: AnswerViewController.CurrentUserScoreKey)
+            ibScoreLabel.text = String(newValue * scoreCoefficient)
+        }
+    }
+    
+    private let question: Question
+    var answerComplition: ((Int) -> Void)?
+    
+    init(question: Question, scoreCoefficient: Int, livesQuantity: Int? = nil) {
         self.question = question
+        self.scoreCoefficient = scoreCoefficient
+        self.livesQuantity = livesQuantity
+        
         super.init(nibName: nil, bundle: nil)
+        self.score = 0
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -40,7 +57,17 @@ class AnswerViewController: UIViewController, Alertable {
 
     private func setupUI() {
         ibQuestionLabel.text = question.question
+        setupExpirationUI()
         setupOptionsUI()
+    }
+    
+    private func setupExpirationUI() {
+        if let unwlivesQuantity = livesQuantity {
+            ibExpirationNameLabel.text = "LIVES"
+            ibExpirationCounterLabel.text = String(unwlivesQuantity)
+        } else {
+            ibExpirationNameLabel.text = "TIME"
+        }
     }
     
     private func setupOptionsUI() {
@@ -82,12 +109,13 @@ class AnswerViewController: UIViewController, Alertable {
             HUD.flash(.success, delay: 1.0, completion: { [weak self] success in
                 self?.navigationController?.popViewController(animated: true)
             })
+            score += 1
         } else {
             HUD.flash(.error, delay: 1.0, completion: { [weak self] success in
                 self?.navigationController?.popViewController(animated: true)
             })
         }
-        answerComplition?(isCorrectAnswerPressed(sender))
+        answerComplition?(score)
     }
     
     private func isCorrectAnswerPressed(_ sender: UIButton) -> Bool {
@@ -96,5 +124,5 @@ class AnswerViewController: UIViewController, Alertable {
     }
 }
 
-
+//UserDefaults.standard.set(teamIds, forKey: Constants.favoriteTeamsStorageKey)
 
