@@ -24,9 +24,13 @@ class QuestionViewController: UIViewController, Alertable {
         }
     }
     
+    private var record: Int {
+        return UserDefaults.standard.integer(forKey: Constants.CurrentUserScoreKey)
+    }
+    
     private var score: Int = 0 {
         didSet {
-          ibScoreLabel.text = String(score * scoreCoefficient)
+          ibScoreLabel.text = String(score)
         }
     }
     
@@ -56,6 +60,7 @@ class QuestionViewController: UIViewController, Alertable {
     // MARK: - Private methods
     private func setupResultView() {
         ibLivesLabel.text = String(livesQuantity)
+        ibRecordLabel.text = String(record)
     }
     
     private func setupTableView() {
@@ -90,7 +95,8 @@ extension QuestionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let question = questionsArray[indexPath.row]
-        let answerVC = AnswerViewController(question: question, scoreCoefficient: scoreCoefficient, livesQuantity: livesQuantity)
+        print(question.answer + 1)
+        let answerVC = AnswerLifeViewController(question: question, scoreCoefficient: scoreCoefficient, livesQuantity: livesQuantity)
         navigationController?.pushViewController(answerVC, animated: true)
         
         answerVC.answerComplition = { [unowned self] score in

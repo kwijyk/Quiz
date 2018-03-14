@@ -23,8 +23,8 @@
 		88452DEC2008A72F000AE4B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88452DEB2008A72F000AE4B2 /* Assets.xcassets */; };
 		88452DEF2008A72F000AE4B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88452DED2008A72F000AE4B2 /* LaunchScreen.storyboard */; };
 		88452DFE2008A8B1000AE4B2 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452DF82008A8B1000AE4B2 /* QuestionViewController.swift */; };
-		88452E002008A8B1000AE4B2 /* AnswerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88452DFA2008A8B1000AE4B2 /* AnswerViewController.xib */; };
-		88452E012008A8B1000AE4B2 /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452DFB2008A8B1000AE4B2 /* AnswerViewController.swift */; };
+		88452E002008A8B1000AE4B2 /* AnswerTimeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88452DFA2008A8B1000AE4B2 /* AnswerTimeViewController.xib */; };
+		88452E012008A8B1000AE4B2 /* AnswerTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452DFB2008A8B1000AE4B2 /* AnswerTimeViewController.swift */; };
 		88452E022008A8B1000AE4B2 /* QuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88452DFC2008A8B1000AE4B2 /* QuestionViewController.xib */; };
 		88452E092008A8C7000AE4B2 /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E062008A8C7000AE4B2 /* QuestionTableViewCell.swift */; };
 		88452E0A2008A8C7000AE4B2 /* QuestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88452E072008A8C7000AE4B2 /* QuestionTableViewCell.xib */; };
@@ -40,6 +40,7 @@
 		88452E272008A8E0000AE4B2 /* Notification+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E252008A8E0000AE4B2 /* Notification+Extansion.swift */; };
 		88452E282008A8E0000AE4B2 /* PKHUD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E262008A8E0000AE4B2 /* PKHUD+Extension.swift */; };
 		88901942204EFBD2008D5EDA /* Quiz.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8890193F204EFBD2008D5EDA /* Quiz.sqlite */; };
+		88BC8D602059503400835223 /* AnswerLifeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BC8D5E2059503400835223 /* AnswerLifeViewController.swift */; };
 		88C0D3772046B89D0029D6ED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C0D3762046B89D0029D6ED /* Constants.swift */; };
 		88C14D13201B565D00E42882 /* Quiz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D11201B565D00E42882 /* Quiz.xcdatamodeld */; };
 		88C14D15201B567100E42882 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D14201B567100E42882 /* CoreDataManager.swift */; };
@@ -48,6 +49,7 @@
 		88C14D1E201B5D4A00E42882 /* CategoryMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D1A201B5D4A00E42882 /* CategoryMO+CoreDataClass.swift */; };
 		88C14D1F201B5D4A00E42882 /* CategoryMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C14D1B201B5D4A00E42882 /* CategoryMO+CoreDataProperties.swift */; };
 		88D1840120446FA4001A0A8D /* GlobalApperance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D1840020446FA4001A0A8D /* GlobalApperance.swift */; };
+		88F6745920595F7800ED44E7 /* AnswerLifeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88BC8D5F2059503400835223 /* AnswerLifeViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,8 +72,8 @@
 		88452DEE2008A72F000AE4B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88452DF02008A72F000AE4B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88452DF82008A8B1000AE4B2 /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
-		88452DFA2008A8B1000AE4B2 /* AnswerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnswerViewController.xib; sourceTree = "<group>"; };
-		88452DFB2008A8B1000AE4B2 /* AnswerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerViewController.swift; sourceTree = "<group>"; };
+		88452DFA2008A8B1000AE4B2 /* AnswerTimeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnswerTimeViewController.xib; sourceTree = "<group>"; };
+		88452DFB2008A8B1000AE4B2 /* AnswerTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerTimeViewController.swift; sourceTree = "<group>"; };
 		88452DFC2008A8B1000AE4B2 /* QuestionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionViewController.xib; sourceTree = "<group>"; };
 		88452E062008A8C7000AE4B2 /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
 		88452E072008A8C7000AE4B2 /* QuestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTableViewCell.xib; sourceTree = "<group>"; };
@@ -87,6 +89,8 @@
 		88452E252008A8E0000AE4B2 /* Notification+Extansion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification+Extansion.swift"; sourceTree = "<group>"; };
 		88452E262008A8E0000AE4B2 /* PKHUD+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PKHUD+Extension.swift"; sourceTree = "<group>"; };
 		8890193F204EFBD2008D5EDA /* Quiz.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Quiz.sqlite; sourceTree = "<group>"; };
+		88BC8D5E2059503400835223 /* AnswerLifeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerLifeViewController.swift; sourceTree = "<group>"; };
+		88BC8D5F2059503400835223 /* AnswerLifeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnswerLifeViewController.xib; sourceTree = "<group>"; };
 		88C0D3762046B89D0029D6ED /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		88C14D12201B565D00E42882 /* Quiz.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Quiz.xcdatamodel; sourceTree = "<group>"; };
 		88C14D14201B567100E42882 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -331,8 +335,10 @@
 		88D183FF204464BD001A0A8D /* Answers */ = {
 			isa = PBXGroup;
 			children = (
-				88452DFB2008A8B1000AE4B2 /* AnswerViewController.swift */,
-				88452DFA2008A8B1000AE4B2 /* AnswerViewController.xib */,
+				88BC8D5E2059503400835223 /* AnswerLifeViewController.swift */,
+				88BC8D5F2059503400835223 /* AnswerLifeViewController.xib */,
+				88452DFB2008A8B1000AE4B2 /* AnswerTimeViewController.swift */,
+				88452DFA2008A8B1000AE4B2 /* AnswerTimeViewController.xib */,
 			);
 			path = Answers;
 			sourceTree = "<group>";
@@ -399,10 +405,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88452E002008A8B1000AE4B2 /* AnswerViewController.xib in Resources */,
+				88452E002008A8B1000AE4B2 /* AnswerTimeViewController.xib in Resources */,
 				88452E0A2008A8C7000AE4B2 /* QuestionTableViewCell.xib in Resources */,
 				88452DEF2008A72F000AE4B2 /* LaunchScreen.storyboard in Resources */,
 				49C4DB6B2055CC2400980DD6 /* PlayModeViewController.xib in Resources */,
+				88F6745920595F7800ED44E7 /* AnswerLifeViewController.xib in Resources */,
 				88901942204EFBD2008D5EDA /* Quiz.sqlite in Resources */,
 				49CF927D2055744E00FA68C0 /* MainMenuViewController.xib in Resources */,
 				88452DEC2008A72F000AE4B2 /* Assets.xcassets in Resources */,
@@ -484,7 +491,8 @@
 				88C14D13201B565D00E42882 /* Quiz.xcdatamodeld in Sources */,
 				88452E172008A8D0000AE4B2 /* Endpoint.swift in Sources */,
 				8824F66C20517FE200AD79BA /* ReusableView.swift in Sources */,
-				88452E012008A8B1000AE4B2 /* AnswerViewController.swift in Sources */,
+				88BC8D602059503400835223 /* AnswerLifeViewController.swift in Sources */,
+				88452E012008A8B1000AE4B2 /* AnswerTimeViewController.swift in Sources */,
 				88C14D1D201B5D4A00E42882 /* QuestionMO+CoreDataProperties.swift in Sources */,
 				88452E202008A8D6000AE4B2 /* Utils.swift in Sources */,
 				88C0D3772046B89D0029D6ED /* Constants.swift in Sources */,

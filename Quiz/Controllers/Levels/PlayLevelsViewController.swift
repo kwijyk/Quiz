@@ -114,6 +114,7 @@ class PlayLevelsViewController: UIViewController {
     }
 
     @IBAction private func levelDidSelected(_ sender: UIButton) {
+        UserDefaults.standard.set(0, forKey: Constants.CurrentUserScoreKey)
         let levelType = getLevel(by: sender)
         switch playType {
         case .forLife:
@@ -122,7 +123,7 @@ class PlayLevelsViewController: UIViewController {
         case .forTime:
             CoreDataManager.instance.fetchRandomQuestions(quantity: 1, complitionHandler: { [weak self] questions in
                 guard let unwQuestion = questions.first else { return }
-                let answerVC = AnswerViewController(question: unwQuestion, scoreCoefficient: levelType.scoreCoefficient)
+                let answerVC = AnswerLifeViewController(question: unwQuestion, scoreCoefficient: levelType.scoreCoefficient)
                 self?.navigationController?.pushViewController(answerVC, animated: true)
             })
         }

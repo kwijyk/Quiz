@@ -9,25 +9,28 @@
 import UIKit
 import PKHUD
 
-class AnswerViewController: UIViewController, Alertable {
-    
-    static let CurrentUserScoreKey = "currentUserScore"
-    static let MaxUserScoreKey = "currentUserScore"
+class AnswerLifeViewController: UIViewController, Alertable {
     
     @IBOutlet private weak var ibRecordLabel: UILabel!
     @IBOutlet private weak var ibScoreLabel: UILabel!
     @IBOutlet private weak var ibAnswersContentView: UIStackView!
     @IBOutlet private weak var ibQuestionLabel: UILabel!
-    @IBOutlet weak var ibExpirationCounterLabel: UILabel!
-    @IBOutlet weak var ibExpirationNameLabel: UILabel!
+    @IBOutlet weak var ibLivesCounterLabel: UILabel!
     
     let scoreCoefficient: Int
     let livesQuantity: Int?
 
+    private var record: Int {
+        get { return UserDefaults.standard.integer(forKey: Constants.MaxLifeUserScoreKey) }
+        set { UserDefaults.standard.set(newValue, forKey: Constants.MaxLifeUserScoreKey)
+            ibRecordLabel.text = String(newValue)
+        }
+    }
+    
     private var score: Int {
-        get { return UserDefaults.standard.integer(forKey: AnswerViewController.CurrentUserScoreKey) }
-        set { UserDefaults.standard.set(newValue, forKey: AnswerViewController.CurrentUserScoreKey)
-            ibScoreLabel.text = String(newValue * scoreCoefficient)
+        get { return UserDefaults.standard.integer(forKey: Constants.CurrentUserScoreKey) }
+        set { UserDefaults.standard.set(newValue, forKey: Constants.CurrentUserScoreKey)
+            ibScoreLabel.text = String(newValue)
         }
     }
     
@@ -38,9 +41,7 @@ class AnswerViewController: UIViewController, Alertable {
         self.question = question
         self.scoreCoefficient = scoreCoefficient
         self.livesQuantity = livesQuantity
-        
         super.init(nibName: nil, bundle: nil)
-        self.score = 0
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -50,6 +51,7 @@ class AnswerViewController: UIViewController, Alertable {
     override func viewDidLoad() {
         super.viewDidLoad()
         ibQuestionLabel.text = question.question
+        ibRecordLabel.text = String(record)
         setupUI()
     }
     
@@ -57,17 +59,9 @@ class AnswerViewController: UIViewController, Alertable {
 
     private func setupUI() {
         ibQuestionLabel.text = question.question
-        setupExpirationUI()
+        ibScoreLabel.text = String(score)
+        ibRecordLabel.text = String(record)
         setupOptionsUI()
-    }
-    
-    private func setupExpirationUI() {
-        if let unwlivesQuantity = livesQuantity {
-            ibExpirationNameLabel.text = "LIVES"
-            ibExpirationCounterLabel.text = String(unwlivesQuantity)
-        } else {
-            ibExpirationNameLabel.text = "TIME"
-        }
     }
     
     private func setupOptionsUI() {
@@ -109,7 +103,8 @@ class AnswerViewController: UIViewController, Alertable {
             HUD.flash(.success, delay: 1.0, completion: { [weak self] success in
                 self?.navigationController?.popViewController(animated: true)
             })
-            score += 1
+            score += scoreCoefficient
+            record = score > record ? score : record
         } else {
             HUD.flash(.error, delay: 1.0, completion: { [weak self] success in
                 self?.navigationController?.popViewController(animated: true)

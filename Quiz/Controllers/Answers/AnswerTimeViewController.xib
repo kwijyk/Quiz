@@ -10,14 +10,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnswerViewController" customModule="Quiz" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnswerTimeViewController" customModule="Quiz" customModuleProvider="target">
             <connections>
                 <outlet property="ibAnswersContentView" destination="mly-4r-dcB" id="OWE-IP-1Rz"/>
-                <outlet property="ibExpirationCounterLabel" destination="yLD-zQ-yO4" id="no7-OW-guk"/>
-                <outlet property="ibExpirationNameLabel" destination="sTJ-Wt-HBQ" id="dVw-BZ-peG"/>
-                <outlet property="ibQuestionLabel" destination="kLG-8t-THX" id="9V7-xd-qPS"/>
+                <outlet property="ibQuestionLabel" destination="kLG-8t-THX" id="xq5-qr-8n7"/>
                 <outlet property="ibRecordLabel" destination="2fd-fO-aGE" id="5s6-Lm-eY4"/>
                 <outlet property="ibScoreLabel" destination="Tl2-AP-9Q9" id="hg8-QC-Cuo"/>
+                <outlet property="ibTimeCounterLabel" destination="yLD-zQ-yO4" id="cUA-t0-1fH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
