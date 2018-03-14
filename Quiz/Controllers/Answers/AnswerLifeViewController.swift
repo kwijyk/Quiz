@@ -56,7 +56,6 @@ class AnswerLifeViewController: UIViewController, Alertable {
     }
     
     // MARK: - Private method
-
     private func setupUI() {
         ibQuestionLabel.text = question.question
         ibScoreLabel.text = String(score)
@@ -118,6 +117,3 @@ class AnswerLifeViewController: UIViewController, Alertable {
         return question.answer == answerIndex
     }
 }
-
-//UserDefaults.standard.set(teamIds, forKey: Constants.favoriteTeamsStorageKey)
-

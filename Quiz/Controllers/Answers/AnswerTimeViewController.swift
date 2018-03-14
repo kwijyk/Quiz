@@ -18,10 +18,7 @@ class AnswerTimeViewController: UIViewController, Alertable {
     @IBOutlet private weak var ibScoreLabel: UILabel!
     @IBOutlet private weak var ibAnswersContentView: UIStackView!
     @IBOutlet private weak var ibQuestionLabel: UILabel!
-    @IBOutlet weak var ibTimeCounterLabel: UILabel!
-    
-    let scoreCoefficient: Int
-    let livesQuantity: Int?
+    @IBOutlet private weak var ibTimeCounterLabel: UILabel!
 
     private var record: Int {
         get { return UserDefaults.standard.integer(forKey: Constants.MaxTimeUserScoreKey) }
@@ -37,13 +34,13 @@ class AnswerTimeViewController: UIViewController, Alertable {
         }
     }
     
-    private let question: Question
+    let scoreCoefficient: Int
+    private var question: Question?
+    
     var answerComplition: ((Int) -> Void)?
     
-    init(question: Question, scoreCoefficient: Int, livesQuantity: Int? = nil) {
-        self.question = question
+    init(scoreCoefficient: Int) {
         self.scoreCoefficient = scoreCoefficient
-        self.livesQuantity = livesQuantity
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -53,22 +50,30 @@ class AnswerTimeViewController: UIViewController, Alertable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ibQuestionLabel.text = question.question
         ibRecordLabel.text = String(record)
         setupUI()
+        fetchQuestion()
     }
     
     // MARK: - Private method
-
+    private func fetchQuestion() {
+        CoreDataManager.instance.fetchRandomQuestions(quantity: 1) { [unowned self] questions in
+            guard let question = questions.first else { return }
+            self.question = question
+            self.ibQuestionLabel.text = question.question
+            self.setupOptionsUI()
+        }
+    }
+    
     private func setupUI() {
-        ibQuestionLabel.text = question.question
         ibScoreLabel.text = String(score)
         ibRecordLabel.text = String(record)
         setupOptionsUI()
     }
 
     private func setupOptionsUI() {
-        guard  !question.options.isEmpty else { return }
+        guard let question = question,
+              !question.options.isEmpty else { return }
         let numberOfButtonsInLine = 2
         var buttonsInLine = [UIButton]()
         for (index, option) in question.options.enumerated() {
@@ -102,15 +107,16 @@ class AnswerTimeViewController: UIViewController, Alertable {
     }
     
     @objc private func answerPressed(_ sender: UIButton) {
+        
         if isCorrectAnswerPressed(sender) {
             HUD.flash(.success, delay: 1.0, completion: { [weak self] success in
-                self?.navigationController?.popViewController(animated: true)
+                
             })
             score += scoreCoefficient
             record = score > record ? score : record
         } else {
             HUD.flash(.error, delay: 1.0, completion: { [weak self] success in
-                self?.navigationController?.popViewController(animated: true)
+                
             })
         }
         answerComplition?(score)
@@ -118,9 +124,10 @@ class AnswerTimeViewController: UIViewController, Alertable {
     
     private func isCorrectAnswerPressed(_ sender: UIButton) -> Bool {
         let answerIndex = sender.tag
-        return question.answer == answerIndex
+        guard let unwQuestion = question else {
+            fatalError("Question not loaded")
+        }
+        return unwQuestion.answer == answerIndex
     }
 }
-
-//UserDefaults.standard.set(teamIds, forKey: Constants.favoriteTeamsStorageKey)
 

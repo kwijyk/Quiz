@@ -123,7 +123,7 @@ class PlayLevelsViewController: UIViewController {
         case .forTime:
             CoreDataManager.instance.fetchRandomQuestions(quantity: 1, complitionHandler: { [weak self] questions in
                 guard let unwQuestion = questions.first else { return }
-                let answerVC = AnswerLifeViewController(question: unwQuestion, scoreCoefficient: levelType.scoreCoefficient)
+                let answerVC = AnswerTimeViewController(scoreCoefficient: levelType.scoreCoefficient)
                 self?.navigationController?.pushViewController(answerVC, animated: true)
             })
         }
