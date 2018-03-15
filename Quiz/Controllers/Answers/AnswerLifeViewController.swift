@@ -17,8 +17,8 @@ class AnswerLifeViewController: UIViewController, Alertable {
     @IBOutlet private weak var ibQuestionLabel: UILabel!
     @IBOutlet weak var ibLivesCounterLabel: UILabel!
     
-    let scoreCoefficient: Int
-    var livesQuantity: Int = 0 {
+    private let scoreCoefficient: Int
+    private var livesQuantity: Int = 0 {
         didSet {
             ibLivesCounterLabel.text = String(livesQuantity)
         }

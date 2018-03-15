@@ -31,12 +31,16 @@ class AnswerTimeViewController: UIViewController, Alertable {
             ibScoreLabel.text = String(newValue) }
     }
     
-    let scoreCoefficient: Int
+    private let scoreCoefficient: Int
     private var question: Question?
     
-    var answerComplition: ((Int) -> Void)?
+    private var timeCounter: Int = 0 {
+        didSet { ibTimeCounterLabel.text = String(timeCounter) }
+    }
+    private var timer: Timer?
     
-    init(scoreCoefficient: Int) {
+    init(time: Int, scoreCoefficient: Int) {
+        self.timeCounter = time
         self.scoreCoefficient = scoreCoefficient
         super.init(nibName: nil, bundle: nil)
     }
@@ -50,9 +54,33 @@ class AnswerTimeViewController: UIViewController, Alertable {
         ibRecordLabel.text = String(record)
         setupUI()
         fetchQuestion()
+        startTimer()
     }
     
     // MARK: - Private method
+    private func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1,
+                                     target: self,
+                                     selector: #selector(timerAction),
+                                     userInfo: nil,
+                                     repeats: true)
+    }
+    
+    @objc private func timerAction() {
+        timeCounter -= 1
+        if timeCounter == 0, score > record  {
+            timer?.invalidate()
+            record = score
+            showMessage(title: "NEW RECORD \(score) points", handler: { [unowned self] in
+                self.navigationController?.popToRootViewController(animated: true)
+            })
+        } else if timeCounter == 0, score <= record {
+            showMessage(title: "GAME OVER", handler: { [unowned self] in
+                self.navigationController?.popToRootViewController(animated: true)
+            })
+        }
+    }
+    
     private func fetchQuestion() {
         CoreDataManager.instance.fetchRandomQuestions(quantity: 1) { [unowned self] questions in
             guard let question = questions.first else { return }
@@ -66,10 +94,12 @@ class AnswerTimeViewController: UIViewController, Alertable {
     private func setupUI() {
         ibScoreLabel.text = String(score)
         ibRecordLabel.text = String(record)
+        ibTimeCounterLabel.text = String(timeCounter)
         setupOptionsUI()
     }
 
     private func setupOptionsUI() {
+        ibAnswersContentView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         guard let question = question,
               !question.options.isEmpty else { return }
         let numberOfButtonsInLine = 2
@@ -105,19 +135,13 @@ class AnswerTimeViewController: UIViewController, Alertable {
     }
     
     @objc private func answerPressed(_ sender: UIButton) {
-        
         if isCorrectAnswerPressed(sender) {
-            HUD.flash(.success, delay: 1.0, completion: { [weak self] success in
-                
-            })
+            HUD.flash(.success, delay: 1.0)
             score += scoreCoefficient
-            record = score > record ? score : record
         } else {
-            HUD.flash(.error, delay: 1.0, completion: { [weak self] success in
-                
-            })
+            HUD.flash(.error, delay: 1.0)
         }
-        answerComplition?(score)
+        fetchQuestion()
     }
     
     private func isCorrectAnswerPressed(_ sender: UIButton) -> Bool {

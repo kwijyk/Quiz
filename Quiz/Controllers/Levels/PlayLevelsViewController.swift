@@ -29,11 +29,11 @@ class PlayLevelsViewController: UIViewController {
         var timeButtonName: String {
             switch self {
             case .firstLevel:
-                return "1 MINUTE"
+                return "3 MINUTE"
             case .secondLevel:
                 return "2 MINUTE"
             case .thirdLevel:
-                return "3 MINUTE"
+                return "1 MINUTE"
             }
         }
         
@@ -62,11 +62,11 @@ class PlayLevelsViewController: UIViewController {
         var timerValue: Int {
             switch self {
             case .firstLevel:
-                return 3
+                return 180
             case .secondLevel:
-                return 2
+                return 120
             case .thirdLevel:
-                return 1
+                return 60
             }
         }
         
@@ -121,7 +121,7 @@ class PlayLevelsViewController: UIViewController {
             let questionVC = QuestionViewController(scoreCoefficient: levelType.scoreCoefficient, livesQuantity: levelType.livesQuantity)
             navigationController?.pushViewController(questionVC, animated: true)
         case .forTime:
-            let answerVC = AnswerTimeViewController(scoreCoefficient: levelType.scoreCoefficient)
+            let answerVC = AnswerTimeViewController(time: levelType.timerValue, scoreCoefficient: levelType.scoreCoefficient)
             navigationController?.pushViewController(answerVC, animated: true)
         }
     }
