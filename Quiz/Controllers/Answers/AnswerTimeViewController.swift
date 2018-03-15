@@ -86,8 +86,7 @@ class AnswerTimeViewController: UIViewController, Alertable {
             guard let question = questions.first else { return }
             print(question.answer + 1)
             self.question = question
-            self.ibQuestionLabel.text = question.question
-            self.setupOptionsUI()
+            self.setupUI()
         }
     }
     
@@ -95,7 +94,16 @@ class AnswerTimeViewController: UIViewController, Alertable {
         ibScoreLabel.text = String(score)
         ibRecordLabel.text = String(record)
         ibTimeCounterLabel.text = String(timeCounter)
+//        ibQuestionLabel.text = question?.question
         setupOptionsUI()
+        
+        
+        UIView.transition(with: ibQuestionLabel,
+                          duration: 0.25,
+                          options: .transitionCrossDissolve,
+                          animations: { [weak self] in
+                            self?.ibQuestionLabel.text = self?.question?.question
+            }, completion: nil)
     }
 
     private func setupOptionsUI() {
@@ -136,10 +144,10 @@ class AnswerTimeViewController: UIViewController, Alertable {
     
     @objc private func answerPressed(_ sender: UIButton) {
         if isCorrectAnswerPressed(sender) {
-            HUD.flash(.success, delay: 1.0)
+            HUD.flash(.success, delay: 0.25)
             score += scoreCoefficient
         } else {
-            HUD.flash(.error, delay: 1.0)
+            HUD.flash(.error, delay: 0.25)
         }
         fetchQuestion()
     }
