@@ -22,16 +22,13 @@ class AnswerTimeViewController: UIViewController, Alertable {
 
     private var record: Int {
         get { return UserDefaults.standard.integer(forKey: Constants.MaxTimeUserScoreKey) }
-        set { UserDefaults.standard.set(newValue, forKey: Constants.MaxTimeUserScoreKey)
-            ibRecordLabel.text = String(newValue)
-        }
+        set { UserDefaults.standard.set(newValue, forKey: Constants.MaxTimeUserScoreKey) }
     }
     
     private var score: Int {
         get { return UserDefaults.standard.integer(forKey: Constants.CurrentUserScoreKey) }
         set { UserDefaults.standard.set(newValue, forKey: Constants.CurrentUserScoreKey)
-            ibScoreLabel.text = String(newValue)
-        }
+            ibScoreLabel.text = String(newValue) }
     }
     
     let scoreCoefficient: Int
@@ -59,6 +56,7 @@ class AnswerTimeViewController: UIViewController, Alertable {
     private func fetchQuestion() {
         CoreDataManager.instance.fetchRandomQuestions(quantity: 1) { [unowned self] questions in
             guard let question = questions.first else { return }
+            print(question.answer + 1)
             self.question = question
             self.ibQuestionLabel.text = question.question
             self.setupOptionsUI()

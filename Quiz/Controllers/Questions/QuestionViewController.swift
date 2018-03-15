@@ -25,7 +25,7 @@ class QuestionViewController: UIViewController, Alertable {
     }
     
     private var record: Int {
-        return UserDefaults.standard.integer(forKey: Constants.CurrentUserScoreKey)
+        return UserDefaults.standard.integer(forKey: Constants.MaxLifeUserScoreKey)
     }
     
     private var score: Int = 0 {
@@ -95,7 +95,6 @@ extension QuestionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let question = questionsArray[indexPath.row]
-        print(question.answer + 1)
         let answerVC = AnswerLifeViewController(question: question, scoreCoefficient: scoreCoefficient, livesQuantity: livesQuantity)
         navigationController?.pushViewController(answerVC, animated: true)
         
