@@ -8,6 +8,7 @@
 
 import UIKit
 import PKHUD
+import GameKit
 
 class AnswerTimeViewController: UIViewController, Alertable {
     
@@ -73,6 +74,7 @@ class AnswerTimeViewController: UIViewController, Alertable {
             record = score
             showMessage(title: "NEW RECORD \(score) points", handler: { [unowned self] in
                 self.navigationController?.popToRootViewController(animated: true)
+                self.addScoreAndSubmitToGC()
             })
         } else if timeCounter == 0, score <= record {
             showMessage(title: "GAME OVER", handler: { [unowned self] in
@@ -158,6 +160,19 @@ class AnswerTimeViewController: UIViewController, Alertable {
             fatalError("Question not loaded")
         }
         return unwQuestion.answer == answerIndex
+    }
+    
+    private func addScoreAndSubmitToGC() {
+        // Submit score to GC leaderboard
+        let bestScoreInt = GKScore(leaderboardIdentifier: Constants.TimeLeaderboard_ID)
+        bestScoreInt.value = Int64(score)
+        GKScore.report([bestScoreInt]) { (error) in
+            if error != nil {
+                print(error!.localizedDescription)
+            } else {
+                print("Best Score submitted to your Leaderboard!")
+            }
+        }
     }
 }
 

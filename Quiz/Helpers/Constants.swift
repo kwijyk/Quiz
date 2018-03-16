@@ -16,5 +16,6 @@ struct Constants {
     static let MaxTimeUserScoreKey = "MaxTimeUserScoreKey"
     static let CurrentUserScoreKey = "CurrentUserScoreKey"
     
-    static let LEADERBOARD_ID = "com.score.quiz"
+    static let LifeLeaderboard_ID = "com.lifeleaderboard.quiz"
+    static let TimeLeaderboard_ID = "com.timeleaderboard.quiz"
 }

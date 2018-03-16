@@ -134,7 +134,7 @@ class AnswerLifeViewController: UIViewController, Alertable {
     
     private func addScoreAndSubmitToGC() {
         // Submit score to GC leaderboard
-        let bestScoreInt = GKScore(leaderboardIdentifier: Constants.LEADERBOARD_ID)
+        let bestScoreInt = GKScore(leaderboardIdentifier: Constants.LifeLeaderboard_ID)
         bestScoreInt.value = Int64(score)
         GKScore.report([bestScoreInt]) { (error) in
             if error != nil {

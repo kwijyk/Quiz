@@ -56,8 +56,8 @@ class MainMenuViewController: UIViewController {
     @IBAction private func leaderboardAction(_ sender: Any) {
         let gcVC = GKGameCenterViewController()
         gcVC.gameCenterDelegate = self
-        gcVC.viewState = .leaderboards
-        gcVC.leaderboardIdentifier = Constants.LEADERBOARD_ID
+//        gcVC.viewState = .leaderboards
+//        gcVC.leaderboardIdentifier = Constants.LEADERBOARD_ID
         present(gcVC, animated: true, completion: nil)
     }
 }
