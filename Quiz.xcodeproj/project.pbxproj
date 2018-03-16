@@ -39,6 +39,7 @@
 		88452E232008A8DC000AE4B2 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E222008A8DC000AE4B2 /* Alertable.swift */; };
 		88452E272008A8E0000AE4B2 /* Notification+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E252008A8E0000AE4B2 /* Notification+Extansion.swift */; };
 		88452E282008A8E0000AE4B2 /* PKHUD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88452E262008A8E0000AE4B2 /* PKHUD+Extension.swift */; };
+		886808E8205BD26000B3DD46 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886808E7205BD26000B3DD46 /* GameKit.framework */; };
 		88901942204EFBD2008D5EDA /* Quiz.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8890193F204EFBD2008D5EDA /* Quiz.sqlite */; };
 		88BC8D602059503400835223 /* AnswerLifeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BC8D5E2059503400835223 /* AnswerLifeViewController.swift */; };
 		88C0D3772046B89D0029D6ED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C0D3762046B89D0029D6ED /* Constants.swift */; };
@@ -88,6 +89,7 @@
 		88452E222008A8DC000AE4B2 /* Alertable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		88452E252008A8E0000AE4B2 /* Notification+Extansion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Notification+Extansion.swift"; sourceTree = "<group>"; };
 		88452E262008A8E0000AE4B2 /* PKHUD+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PKHUD+Extension.swift"; sourceTree = "<group>"; };
+		886808E7205BD26000B3DD46 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		8890193F204EFBD2008D5EDA /* Quiz.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Quiz.sqlite; sourceTree = "<group>"; };
 		88BC8D5E2059503400835223 /* AnswerLifeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerLifeViewController.swift; sourceTree = "<group>"; };
 		88BC8D5F2059503400835223 /* AnswerLifeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnswerLifeViewController.xib; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				405BFB8ABDE7B2EDC4743121 /* Pods_Quiz.framework in Frameworks */,
+				886808E8205BD26000B3DD46 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +129,7 @@
 		3677010D6DD819F7C28166CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				886808E7205BD26000B3DD46 /* GameKit.framework */,
 				0547AE25FE9ABFC21D74555C /* Pods_Quiz.framework */,
 			);
 			name = Frameworks;
@@ -378,10 +382,10 @@
 				TargetAttributes = {
 					88452DE02008A72F000AE4B2 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -651,15 +655,15 @@
 			baseConfigurationReference = D1EA48117FF9436725E3EAF9 /* Pods-Quiz.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E8DYRFL62Y;
 				INFOPLIST_FILE = Quiz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chi.quiz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ae38d97d-5e8e-402d-987f-beb71f820bdd";
-				PROVISIONING_PROFILE_SPECIFIER = QuizApplicationProfile;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -670,15 +674,15 @@
 			baseConfigurationReference = 43BBAF677F7AB9E393B52257 /* Pods-Quiz.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E8DYRFL62Y;
 				INFOPLIST_FILE = Quiz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chi.quiz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ae38d97d-5e8e-402d-987f-beb71f820bdd";
-				PROVISIONING_PROFILE_SPECIFIER = QuizApplicationProfile;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
