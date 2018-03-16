@@ -11,7 +11,10 @@ import Foundation
 struct Constants {
     
     static let numberOfItemInPage = 20
+    
     static let MaxLifeUserScoreKey = "MaxLifeUserScoreKey"
     static let MaxTimeUserScoreKey = "MaxTimeUserScoreKey"
     static let CurrentUserScoreKey = "CurrentUserScoreKey"
+    
+    static let LEADERBOARD_ID = "com.score.quiz"
 }

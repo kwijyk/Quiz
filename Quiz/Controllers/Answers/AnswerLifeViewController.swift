@@ -8,6 +8,7 @@
 
 import UIKit
 import PKHUD
+import GameKit
 
 class AnswerLifeViewController: UIViewController, Alertable {
     
@@ -111,6 +112,7 @@ class AnswerLifeViewController: UIViewController, Alertable {
                 record = score
                 showMessage(title: "NEW RECORD \(score) points", handler: { [unowned self] in
                     self.navigationController?.popToRootViewController(animated: true)
+                    self.addScoreAndSubmitToGC()
                 })
             } else if livesQuantity == 0, score <= record {
                 showMessage(title: "GAME OVER", handler: { [unowned self] in
@@ -129,4 +131,18 @@ class AnswerLifeViewController: UIViewController, Alertable {
         let answerIndex = sender.tag
         return question.answer == answerIndex
     }
+    
+    private func addScoreAndSubmitToGC() {
+        // Submit score to GC leaderboard
+        let bestScoreInt = GKScore(leaderboardIdentifier: Constants.LEADERBOARD_ID)
+        bestScoreInt.value = Int64(score)
+        GKScore.report([bestScoreInt]) { (error) in
+            if error != nil {
+                print(error!.localizedDescription)
+            } else {
+                print("Best Score submitted to your Leaderboard!")
+            }
+        }
+    }
 }
+
