@@ -12,7 +12,6 @@ import GameKit
 class MainMenuViewController: UIViewController {
 
     private var gcEnabled = Bool() // Check if the user has Game Center enabled
-    private var gcDefaultLeaderBoard = String() // Check the default leaderboardID
     private var score = 0
     
     override func viewDidLoad() {
@@ -21,33 +20,39 @@ class MainMenuViewController: UIViewController {
         authenticateLocalPlayer()
     }
     
-    // MARK: - AUTHENTICATE LOCAL PLAYER
+//  MARK: - AUTHENTICATE LOCAL PLAYER
     func authenticateLocalPlayer() {
         let localPlayer: GKLocalPlayer = GKLocalPlayer.localPlayer()
-        
-        localPlayer.authenticateHandler = {(ViewController, error) -> Void in
+        localPlayer.authenticateHandler = { [weak self] (ViewController, error) in
             if((ViewController) != nil) {
-                // 1. Show login if player is not logged in
-                self.present(ViewController!, animated: true, completion: nil)
+                self?.present(ViewController!, animated: true, completion: nil)
             } else if (localPlayer.isAuthenticated) {
-                // 2. Player is already authenticated & logged in, load game center
-                self.gcEnabled = true
-                
-                // Get the default leaderboard ID
-                localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: { (leaderboardIdentifer, error) in
-                    if error == nil {
-                        self.gcDefaultLeaderBoard = leaderboardIdentifer!
-                    }
+                self?.gcEnabled = true
+                self?.fetchUsersScore(leaderboardID: Constants.LifeLeaderboard_ID, complition: { userScore in
+                    UserDefaults.standard.set(userScore, forKey: Constants.MaxLifeUserScoreKey)
                 })
             } else {
-                // 3. Game center is not enabled on the users device
-                self.gcEnabled = false
+                self?.gcEnabled = false
                 print("Local player could not be authenticated!")
             }
         }
     }
     
     // MARK: - Private methods
+    private func fetchUsersScore(leaderboardID: String, complition: @escaping (Int) -> Void) {
+        let leaderboardRequest = GKLeaderboard()
+        leaderboardRequest.identifier = Constants.LifeLeaderboard_ID
+        leaderboardRequest.loadScores { scores, error in
+            if error != nil {
+                print("Error load score")
+                complition(0)
+            } else{
+                guard let score = leaderboardRequest.localPlayerScore?.value else { return }
+                complition(Int(score))
+            }
+        }
+    }
+    
     @IBAction private func newGameAction(_ sender: Any) {
         let playModeVC = PlayModeViewController()
         navigationController?.pushViewController(playModeVC, animated: true)

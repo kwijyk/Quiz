@@ -20,7 +20,7 @@ class PlayLevelsViewController: UIViewController {
             case .firstLevel:
                 return "EASY"
             case .secondLevel:
-                return "MIDDLE"
+                return "NORMAL"
             case .thirdLevel:
                 return "HARD"
             }
